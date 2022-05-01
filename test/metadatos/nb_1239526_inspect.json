@@ -1,0 +1,48 @@
+{
+        "name": "nb_1239526",
+        "requirements": [
+                {
+                        "name": "geopandas",
+                        "version": "0.10.2"
+                },
+                {
+                        "name": "numpy",
+                        "version": "1.22.3"
+                },
+                {
+                        "name": "pandas",
+                        "version": "1.4.1"
+                },
+                {
+                        "name": "requests",
+                        "version": "2.27.1"
+                }
+        ],
+        "body": {
+                "calls": [
+                        "geopandas.GeoDataFrame.from_file",
+                        "zipcodes.to_crs.to_crs",
+                        "pandas.read_pickle",
+                        "pandas.DataFrame",
+                        "pd.read_pickle.join",
+                        "zipcodes.to_crs.merge",
+                        "rides_summary.join.to_csv"
+                ],
+                "store_vars_calls": {
+                        "zipcodes": "zipcodes.to_crs",
+                        "rides_summary": "pd.read_pickle",
+                        "modes_df": "pd.DataFrame",
+                        "zip_summary": "rides_summary.join",
+                        "zip_durs": "zipcodes.merge"
+                }
+        },
+        "description": [
+                "zip_centroids = json.load(file('JFK2014.json'))"
+        ],
+        "paths": [
+                "data/ZIP_CODE_040114/ZIP_CODE_040114.shp",
+                "data-outputs/rides_summary.pkl",
+                "zip_summary.csv",
+                "durations_by_zip1.geojson"
+        ]
+}

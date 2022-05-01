@@ -1,0 +1,36 @@
+{
+        "name": "Metadatos",
+        "bash": [
+                "!pip install pandas"
+        ],
+        "author": [
+                "Daniel Rodriguez",
+                "Pepe perez"
+        ],
+        "title": "Metadatos",
+        "requirements": [
+                {
+                        "name": "matplotlib",
+                        "version": "3.5.1"
+                },
+                {
+                        "name": "pandas",
+                        "version": "1.4.1"
+                }
+        ],
+        "body": {
+                "calls": [
+                        "pandas.DataFrame",
+                        "print",
+                        "matplotlib.plot",
+                        "matplotlib.show"
+                ],
+                "store_vars_calls": {
+                        "tabla": "pd.DataFrame"
+                }
+        },
+        "description": "Ejemplo de una imagen",
+        "paths": [
+                "example.csv"
+        ]
+}

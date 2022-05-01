@@ -1,0 +1,683 @@
+tipo;celda
+Visualizacion;"fig = plt.figure()
+ax = plt.axes()
+plt.grid()
+plt.show()"
+Visualizacion;"plt.figure(figsize=(15,15)) 
+for i in range(0,6):
+    points = koch(i,TOTALWIDTH,(0,10))
+    plt.subplot(2,3,i+1,aspect='equal')
+    plt.plot(np.asarray(points)[:,0],np.asarray(points)[:,1],color='red')
+    plt.axis('off')
+plt.show()"
+Visualizacion;"alphadeg = np.linspace(0.01, 22.5, 100)
+alpha = np.deg2rad(alphadeg)
+e = 1 - 2*(1 - np.cos(alpha))/(1 - np.cos(alpha)**2)
+e = np.abs(e*100)
+plt.plot(alphadeg, e)
+plt.title('One-dimensional approximation error.')
+plt.xlabel('$\\alpha\>\>[^\circ]$', fontsize=14)
+plt.ylabel(r'$|e|\>\>[\%]$', fontsize=14)
+plt.savefig('tex/figs/q1.pdf')
+plt.show()"
+Visualizacion;"s = nd.get_ramon(token_synapse, channel_synapse, id_synapse[3])
+print s.segments[0]
+vars(s)"
+Visualizacion;"nx.draw_networkx(G, width=1, node_size = 100, with_labels=False, pos=nx.fruchterman_reingold_layout(G))#random_layout(G))# fruchterman_reingold_layout(G))
+plt.show()
+nx.draw_networkx(G, width=1, node_size = 100, with_labels=False, pos=nx.random_layout(G))#random_layout(G))
+plt.show()"
+Visualizacion;print(df[['DimVar','DimVal','Label']].to_string())
+Visualizacion;"fig, ax = plt.subplots(2,2, figsize=(12, 7))
+fig.suptitle(""Result for $q_l$"", size=16)
+ax[0, 0].hist(actual_test_values[:, 0], bins=np.linspace(0, 0.02, 40))
+ax[0, 0].set_title('Testing actual values')
+ax[0, 1].hist(modeled_test_values[:, 0], bins=np.linspace(0, 0.02, 40))
+ax[0, 1].set_title('Testing modeled values')
+ax[1, 0].hist(actual_training_values[:, 0], bins=np.linspace(0, 0.02, 40))
+ax[1, 0].set_title('Training actual values')
+ax[1, 1].hist(modeled_training_values[:, 0], bins=np.linspace(0, 0.02, 40))
+ax[1, 1].set_title('Training modeled values')
+plt.show()"
+Visualizacion;"df = pd.read_csv(""weather.csv"")
+df"
+Visualizacion;"melted = pd.melt(df, id_vars=[""day""], var_name='city', value_name='temperature')
+melted"
+Visualizacion;"df = fbc.cobra_reaction_info(model)
+print(df)
+print(""reactions:"", len(model.reactions))
+print(""metabolites:"", len(model.metabolites))
+print(""genes:"", len(model.genes))"
+Visualizacion;"ex_idx = df.index.str.contains('^EX_')
+df[ex_idx]"
+Visualizacion;"zipcodes = gpd.GeoDataFrame.from_file('data/ZIP_CODE_040114/ZIP_CODE_040114.shp')
+zipcodes = zipcodes.to_crs(epsg=4326)
+zipcodes.columns"
+Visualizacion;"for idx, diff in most_improved[:3000]:
+    source_len = len(source_lines[idx].split())
+    target_len = len(ref_lines[idx].split())
+    edit_distance = get_editdistance(baseline_hyp_lines[idx], ref_lines[idx])
+#     print(edit_distance)
+    if (target_len > 10
+    and target_len < 30
+    and len(constraints[idx]) > 1
+    and edit_distance >= 0.5):
+        print(u'S1: {} S2: {}'.format(baseline_scores[idx], constrained_scores[idx]))
+        print(u'Source: {}'.format(source_lines[idx]))
+        print(u'Hyp1: {}'.format(baseline_hyp_lines[idx]))
+        print(u'Constraints: {}'.format(constraints[idx]))
+        print(u'Hyp2: {}'.format(constrained_hyp_lines[idx]))
+        print(u'Ref: {}\n'.format(ref_lines[idx]))"
+Visualizacion;"image = net.blobs['data'].data[4].copy()
+image -= image.min()
+image /= image.max()
+showimage(image.transpose(1, 2, 0))"
+Visualizacion;frame.shape
+Visualizacion;"filters = net.params['conv1'][0].data
+vis_square(filters.transpose(0, 2, 3, 1))"
+Visualizacion;lucky_numbers[4]
+Visualizacion;len(lucky_numbers)
+Visualizacion;df.plot()
+Visualizacion;df.info()
+Visualizacion;df.describe()
+Visualizacion;_ = df.plot(kind='scatter', x='Height', y='Weight')
+Visualizacion;"df['Gendercolor'] = df['Gender'].map({'Male': 'blue', 'Female': 'red'})
+df.head()"
+Visualizacion;"df.plot(kind='scatter', 
+        x='Height',
+        y='Weight',
+        c=df['Gendercolor'],
+        alpha=0.3,
+        title='Male & Female Populations')"
+Visualizacion;"print(""labels.txt \t : \t reviews.txt\n"")
+pretty_print_review_and_label(2137)
+pretty_print_review_and_label(12816)
+pretty_print_review_and_label(6267)
+pretty_print_review_and_label(21934)
+pretty_print_review_and_label(5297)
+pretty_print_review_and_label(4998)"
+Visualizacion;"print(""Pos-to-neg ratio for 'the' = {}"".format(pos_neg_ratios[""the""]))
+print(""Pos-to-neg ratio for 'amazing' = {}"".format(pos_neg_ratios[""amazing""]))
+print(""Pos-to-neg ratio for 'terrible' = {}"".format(pos_neg_ratios[""terrible""]))"
+Visualizacion;"print(""Pos-to-neg ratio for 'the' = {}"".format(pos_neg_ratios[""the""]))
+print(""Pos-to-neg ratio for 'amazing' = {}"".format(pos_neg_ratios[""amazing""]))
+print(""Pos-to-neg ratio for 'terrible' = {}"".format(pos_neg_ratios[""terrible""]))"
+Visualizacion;Image(filename='sentiment_network_2.png')
+Visualizacion;"p = figure(tools=""pan,wheel_zoom,reset,save"",
+           toolbar_location=""above"",
+           title=""Word Positive/Negative Affinity Distribution"")
+p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:], line_color=""#555555"")
+show(p)"
+Visualizacion;"p = figure(tools=""pan,wheel_zoom,reset,save"",
+           toolbar_location=""above"",
+           title=""The frequency distribution of the words in our corpus"")
+p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:], line_color=""#555555"")
+show(p)"
+Visualizacion;Image(filename='sentiment_network_sparse.png')
+Visualizacion;"p = subprocess.Popen(['C:/Program Files (x86)/biogeme-2.4/biogeme-2.4/biogeme.exe', model_name,model_data], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+for line in p.stdout.readlines():
+    print (line),
+"
+Visualizacion;"p = subprocess.Popen(['C:/Program Files (x86)/biogeme-2.4/biogeme-2.4/biosim.exe', model_name+'_res',model_data], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+for line in p.stdout.readlines():
+    print (line),
+"
+Visualizacion;"simres = pd.read_csv(model_name+'_res.enu',sep='\t')
+simres.head()"
+Visualizacion;simres.groupby('Choice_Id')['Accuracy'].mean()
+Visualizacion;simres.groupby('Choice_Id')['ModeAccurate'].mean()
+Visualizacion;simres.groupby(['Choice_Id','Mode_Prediction']).size()
+Visualizacion;scatter(X,y)
+Visualizacion;"scatter(X,y)
+plot_separator(logreg.predict)"
+Visualizacion;"data = np.load(""newdataset1.npz"")
+sxtrain1 = data[""xtrain""]
+sytrain1 = data[""ytrain""]
+print(sxtrain1.shape)
+print(sxtrain1.dtype)
+print(sytrain1.shape)
+print(sytrain1.dtype)
+"
+Visualizacion;"sxtrain2 = sxtrain1[:1049,:,:,:]
+sytrain2 = sytrain1[:1049,:,:]
+sxtest2 = sxtrain1[1049:,:,:,:]
+sytest2 = sytrain1[1049:,:,:]
+print(sxtrain2.shape)
+print(sxtrain2.dtype)
+print(sytrain2.shape)
+print(sytrain2.dtype)
+print(sxtest2.shape)
+print(sxtest2.dtype)
+print(sytest2.shape)
+print(sytest2.dtype)"
+Visualizacion;"xt1 = sxtrain2[0]
+cimg1 = np.zeros((240,320,3),dtype=np.uint8)
+cimg1[:,:,0] = xt1[0,:,:]
+cimg1[:,:,1] = xt1[1,:,:]
+cimg1[:,:,2] = xt1[2,:,:]
+
+plt.imshow(cimg1)
+plt.show()
+plt.imshow(sytrain2[0])
+plt.show()"
+Visualizacion;sytrain2.dtype
+Visualizacion;temp1.summary()
+Visualizacion;model2.summary()
+Visualizacion;"preds1 = model2.predict(sxtrain2,verbose=1)
+print(preds1.shape)
+plt.imshow(preds1[0])
+plt.show()"
+Visualizacion;"print(preds[0])
+ans1 = imresize(preds[0],(480,640))
+print(ans1.shape)
+plt.imshow(ans1)
+plt.show()"
+Visualizacion;predsfine[1].shape
+Visualizacion;"print(len(f1.layers))
+temp12 = f1.get_layer(""convolution2d_1"")
+print(f1.layers[24].output_shape)
+print(f1.layers[26].output_shape)
+print(f1.layers[27].output_shape)
+print(f1.layers[29].output_shape)
+print(f1.layers[30].output_shape)
+print(f1.layers[27].output)
+c1 = f1.get_layer(""lambda_2"")
+print(c1.output_shape)
+print(f1.layers[25].input_shape)"
+Visualizacion;"print(gt1[0][63])
+print(np.max(gt1[0][63]))
+print(np.min(gt1[0][63]))"
+NoVisualizacion;"for i, n in enumerate(basin_name):
+    ax = plt.subplot(3, 2, jj)
+    fig.subplots_adjust(hspace = 0.3, wspace = 0.3)  
+    props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+    ax.text(.95,.02, str(n), fontsize=12, horizontalalignment='right', transform=ax.transAxes)
+    
+    textstr1 = '$R^2 = %.2f$' % r2_sed[n]
+    ax.text(0.05, 0.94, textstr1, fontsize=14, transform=ax.transAxes, verticalalignment='top', bbox=props)
+    
+    if (n == 'Mercer'):     
+        plt.xlim([0, 120])
+        plt.ylim([0, 120])
+        # add 1:1 line
+        x = range(0, 121)
+        y = x
+        plt.plot(x, y,linestyle='--', color='grey')
+    if (n == 'Thornton'): 
+        plt.xlim([0, 300])
+        plt.ylim([0, 300])
+        # add 1:1 line
+        x = range(0, 301)
+        y = x
+        plt.plot(x, y,linestyle='--', color='grey')
+    if (n == 'Issaquah'): 
+        ax.set_yscale('log')
+        ax.set_xscale('log')
+        # add 1:1 line
+        x = range(0, 9000)
+        y = x
+        plt.plot(x, y,linestyle='--', color='grey')
+        plt.xlabel('obs (mg/l))', fontsize=12., labelpad=5)
+    plt.ylabel('sim (mg/l)', fontsize=12., labelpad=5)
+    
+        
+    # s = marker size, alpha = degree of transparency   
+    ax.scatter(sobs[n], ssim[n], s=15, c='black', alpha=0.8)    
+    
+    
+    #grid(True)
+    
+    ########################################################################################################
+    ########################################################################################################
+    jj = jj + 1
+    ax = plt.subplot(3, 2, jj)
+    jj = jj + 1
+    nnn = len(sobs[n])
+    d = np.linspace(1, nnn, num=nnn)/(nnn+1)
+    y  = norm.ppf(d,0,1);
+    
+    # create the axis ticks
+    p  = [0.01, 0.25, 0.5, 0.75, 0.9, 0.99];
+    # relate var ""p"" with ""y""
+    tick  = norm.ppf(p,0,1);
+    label = ['0.01','0.25','0.5','0.75','0.9','0.99'];
+    
+    # sort the data in an ascending order
+    sobs[n].sort()
+    ssim[n].sort()
+    
+    # plot with simulation points that align with the obs
+    ax.plot(y, ssim[n], 'r+', label='sim')
+    ax.plot(y, sobs[n],'k*', label='obs')
+    if (n == 'Issaquah'):
+        ax.set_yscale('log')
+    
+    print 'Kolmogorov-Smirnov Test: ', stats.ks_2samp(ssim[n], sobs[n])
+    
+    # use numpoints option so the markeres don't appear twice in one legend
+    ax.xaxis.set_major_locator(ticker.FixedLocator(tick))
+    ax.xaxis.set_major_formatter(ticker.FixedFormatter(label))
+    
+    # Changing the label's font-size
+    ax.tick_params(axis='x', labelsize=11)
+    
+    if (i == 0):
+        ax.legend(loc='best', numpoints = 1)
+    plt.ylabel('conc. (mg/l)', fontsize=12., labelpad=5)
+    if (n == 'Issaquah'):
+        plt.xlabel('probability', fontsize=12., labelpad=5)
+    #grid(True)"
+NoVisualizacion;"for variable in list_variables:
+    for categories in variable.getchildren():
+        for category in categories.iter(""category""):
+            for labels in category.iter(""labels""):
+                for element in labels.iter(""text""):
+                    if element.attrib['{http://www.w3.org/XML/1998/namespace}lang']=='de-DE':
+                        print(variable.attrib['name'],category.attrib['name'], element.text)
+                        df = df.append(pd.Series([variable.attrib['id'].replace('_',''),category.attrib['id'],variable.attrib['name'],category.attrib['name'], element.text]),ignore_index=True)"
+NoVisualizacion;" while(i<n1 and j<n2):
+        if list1[i]<=list2[j]:
+            merged_list.append(list1[i])
+            i+=1
+        else:
+            merged_list.append(list2[j])
+            j+=1        
+    if(i==n1 and j<n2):
+        for x in range(j,n2):
+            merged_list.append(list2[x])
+    elif(j==n2 and i<n1):
+        for y in range(i,n1):
+            merged_list.append(list1[y])"
+NoVisualizacion;"for ii,s in enumerate(start):
+        if forceWrite or (ii>storedEvent+offset):
+            pickleEvent(dbase, run, s, e[ii], ii+offset, path)"
+NoVisualizacion;"fpath = path + '/book/'
+for json_file in response_data:
+    with open(path + 'book_'+ str(datetime.now()) +'.json', 'w') as outfile:
+        json.dump(json_file, outfile)
+        time.sleep(3)"
+NoVisualizacion;" for _, passenger in data.iterrows():
+        if ""Sex == 'female'"":
+            predictions.append(1)
+        elif ""Sex == 'male'"" and 'Age'< 10 :
+            predictions.append(1)
+        else :
+            predictions.append(0)"
+NoVisualizacion;" for ax in (ax1, ax2, ax3, ax4):
+    ax.set_xlabel('time [h]')
+    ax.legend()"
+NoVisualizacion;" for this_time in times:
+        time_str = datetime.datetime.strftime(this_time,""%Y-%m-%d %H:%M:%S"")
+        for keys, group in data[data.time <= this_time].groupby(['user_id','target_id']) :
+            df.ix[
+               (df['source']==keys[0]) & 
+               (df['target']==keys[1]), time_str
+               ] = len(group)"
+NoVisualizacion;"final_proxpair_df = sum_by_period(proxpair_df, proxdata, time_array)
+proxpair_df.columns = [key.split()[0] for key in proxpair_df.keys()]"
+NoVisualizacion;"calldata=calldata.rename(columns = {'time_stamp':'time'})
+comdata = pd.concat([calldata, smsdata])
+comdata=comdata.rename(columns = {'dest_user_id_if_known':'target_id'})
+comdata = comdata.reset_index()
+comdata['time'] = [datetime.datetime.strptime(stamp, ""%Y-%m-%d %H:%M:%S"") for stamp in comdata['time']]"
+NoVisualizacion;"  for epoch in range(training_epochs):
+        total_batch = int(mnist.train.num_examples/batch_size)
+        c=0.0
+        avg_cost=0.0
+        for i in range(total_batch):
+            learning_rate = min_learning_rate + (max_learning_rate - min_learning_rate) * math.exp(-i/decay_speed)
+            batch_X, batch_Y = mnist.train.next_batch(batch_size)
+                _,c=sess.run([optimizer,cost], feed_dict={X:batch_X,Y_:batch_Y,lr: learning_rate})
+            avg_cost += c / total_batch"
+NoVisualizacion;"while not max_inlines:
+        robot.angular_movement(angle, speed)
+        time.sleep(1)
+        image = kinect.peek_data()
+        new_inlines = get_inlines(image)
+        time.sleep(1)
+        kinect.buffer.clear()
+        clear_output(wait=True)
+        
+        if inlines <= new_inlines:
+            inlines = new_inlines
+            print(""not max_inlines"")
+        else:
+            max_inlines = False
+            return"
+NoVisualizacion;"f = open(file_mdd,'r', encoding=""UTF-8"")
+filedata = f.read()
+f.close()
+filecontent=filedata.replace('/Arc 3/2000-02-04','/Arc_3/2000_02_04')
+filecontent=filecontent.replace('encoding=""UTF-8""','')
+tree = etree.fromstring(filecontent)"
+NoVisualizacion;"for categoryid in list_categoryids:
+    dfcat = dfcat.append(pd.Series([categoryid.attrib['value'],categoryid.attrib['name']]),ignore_index=True)
+dfcat.columns=['CatValue','CatName']
+dfcat.CatValue=dfcat.CatValue.astype(int)"
+NoVisualizacion;"for cls, cls_name in enumerate(classes):
+    idxs = np.where((y_test != cls) & (y_test_pred == cls))[0]
+    idxs = np.random.choice(idxs, examples_per_class, replace=False)
+    for i, idx in enumerate(idxs):
+        plt.subplot(examples_per_class, len(classes), i * len(classes) + cls + 1)
+        plt.imshow(X_test[idx].astype('uint8'))
+        plt.axis('off')
+        if i == 0:
+            plt.title(cls_name)"
+NoVisualizacion;"while 1:
+    if(i%2==0):
+        cosxaprox=math.pow(x, i)/math.factorial(i)
+        ant=serie
+        if(band==False):
+            serie=serie+cosxaprox
+            band=True
+        else:
+            serie=serie-cosxaprox
+            band=False
+        Ev=math.fabs(Val-serie)
+        Et=(Ev/serie)*100
+        Ea=((serie-ant)/serie)*100
+        tabla.append([n,serie,str(Et)+"" %"",str(Ea)+"" %""])
+        n+=1
+    if(math.fabs(Ea)<Es):
+        break
+    i+=1"
+NoVisualizacion;"for sourceid in df1.TargetID:
+    likes = graph.get_connections(sourceid, ""likes"")
+    like_ids = [like['id'] for like in likes['data']]
+    like_names= [like['name'] for like in likes['data']]
+    dfx[""TargetID""]=sourceid
+    df2=pd.concat([df2,dfx])   "
+NoVisualizacion;"for alpha, beta in [(1, 1), (-1, 1), (1, -1), (-1, -1)]:
+    column1 = V1*Matrix([alpha*sqrt(-L12), sqrt(L11)])
+    column2 = V2*Matrix([ beta*sqrt(-L22), sqrt(L21)])
+    test_matrix = st.col_stack(column1, column2)"
+NoVisualizacion;"network.add_edge( s0, s1 )
+network.add_edge( s1, s5 )
+network.add_edge( s2, s3 )
+network.add_edge( s2, s4 )
+network.add_edge( s3, s5 )
+network.add_edge( s5, s6 )
+network.add_edge( s5, s7 )
+network.add_edge( s4, s7 )"
+NoVisualizacion;"for i in range(1,10):
+        if space_check(board, i):
+            return False"
+NoVisualizacion;"while True:
+    theBoard = [' '] * 10
+    player1_marker, player2_marker = player_input()
+    turn = choose_first()
+    game_on = True
+
+    while game_on:
+        if turn == 'Player 1':
+            display_board(theBoard)
+            position = player_choice(theBoard)
+            place_marker(theBoard, player1_marker, position)
+
+            if win_check(theBoard, player1_marker):
+                display_board(theBoard)
+                game_on = False
+            else:
+                if full_board_check(theBoard):
+                    display_board(theBoard)
+                    break
+                else:
+                    turn = 'Player 2'
+
+        else:            
+            display_board(theBoard)
+            position = player_choice(theBoard)
+            place_marker(theBoard, player2_marker, position)
+
+            if win_check(theBoard, player2_marker):
+                display_board(theBoard)
+                print('Player 2 has won!')
+                game_on = False
+            else:
+                if full_board_check(theBoard):
+                    display_board(theBoard)
+                    break
+                else:
+                    turn = 'Player 1'
+
+    if not replay():
+        break"
+NoVisualizacion;"for i, n in enumerate(basin_name): 
+    FsimdateJunk1[n] = np.genfromtxt(simsedfilepath[n], dtype=str, skiprows=0, usecols=[0,1])
+    FobsdateJunk1[n] = np.genfromtxt(simsedfilepath[n], dtype=str, skiprows=0, usecols=[3,4])
+    FsimSed[n] = np.genfromtxt(simsedfilepath[n], dtype=float, skiprows=0, usecols=[2])
+    FsimOther[n] = np.genfromtxt(simotherfilepath[n], dtype=float, skiprows=0, usecols=[2])
+    FsimTP[n] = np.genfromtxt(simTPfilepath[n], dtype=float, skiprows=0, usecols=[2])
+    FobsSed[n] = np.genfromtxt(simsedfilepath[n], dtype=float, skiprows=0, usecols=[5])
+    FobsOther[n] = np.genfromtxt(simotherfilepath[n], dtype=float, skiprows=0, usecols=[5])
+    FobsTP[n] = np.genfromtxt(simTPfilepath[n], dtype=float, skiprows=0, usecols=[5])"
+NoVisualizacion;"for i, n in enumerate(basin_name):
+    gradient, intercept, r_value, p_value, std_err = stats.linregress(FsimSed[n],FobsSed[n])
+    r2_sed[n] = r_value**2"
+NoVisualizacion;"  for epoch in range(training_epochs):
+        total_batch = int(mnist.train.num_examples/batch_size)
+        c=0.0
+        avg_cost=0.0
+        for i in range(total_batch):
+            
+            learning_rate = min_learning_rate + (max_learning_rate - min_learning_rate) * math.exp(-i/decay_speed)
+            
+            batch_X, batch_Y = mnist.train.next_batch(batch_size)
+            _,c=sess.run([optimizer,cost], feed_dict={X:batch_X,Y_:batch_Y,lr: learning_rate,pkeep: 0.75})
+            avg_cost += c / total_batch"
+NoVisualizacion;"for TableName in Parent_L1_Tables.values.tolist():
+    dict_levels=dict(zip(levels.DSCTableName,levels.TableName))
+    TableName.replace(TableName,dict_levels[TableName])
+    con = sqlite3.connect(file_ddf)
+    Table=TableName.replace(TableName,dict_levels[TableName])
+    df = pd.read_sql_query(""SELECT [Respondent.Serial:L] as Respondent, ""+Table+"".* from ""+Table+""  JOIN L1 ON L1.[:P0]=""+Table+"".[:P1] "", con)
+    con.close()
+ 
+    dfnewline=pd.DataFrame([Table]+df.columns.tolist()).T
+    dfTables=pd.concat([dfTables,dfnewline])
+    dfs=df[df.columns[df.columns.str.contains(':S$|Respondent|LevelId')]].copy()
+    dfc1=df[df.columns[df.columns.str.contains(':C1$|Respondent|:P[12]')]].copy()
+
+
+    if 'ban:S' in dfs.columns:
+        dfs=dfs.drop('ban:S', axis=1)
+
+    dict_c1=dict(zip(dfc1.columns,dfc1.columns.str.replace('(:C1|\.Serial:L)','')))
+    dfc1.rename(columns=dict_c1, inplace=True)
+    dfc1['Level']=TableName
+    dfc1m=pd.melt(dfc1,id_vars=['Respondent','Level','LevelId',':P1'],var_name='Variable', value_name='Value')
+    dfc1m['Type']='Single'
+    dict_s=dict(zip(dfs.columns,dfs.columns.str.replace('(:C1|:S|\.Serial:L)','')))
+    dfs.rename(columns=dict_s, inplace=True)
+    dfs.loc[:,'Level']=TableName
+    dfsm=pd.melt(dfs,id_vars=['Respondent','Level','LevelId'],var_name='Variable', value_name='Value')
+
+    if dfsm.Respondent.count()>0:
+        dfsmt=dfsm.drop(['Value'], axis=1).join(dfsm['Value'].str.split(';',expand=True).stack().reset_index(drop=True, level=1).rename('Value') )
+        dfsmt=dfsmt[dfsmt.Value>' ']
+        dfsmt['Value']=dfsmt['Value'].astype(int)
+        dfsmt['Respondent']=dfsmt['Respondent'].astype(int)
+        dfsmt['LevelId']=dfsmt['LevelId'].astype(int)
+        dfsmt['Type']='Multi'
+
+    dfL1=pd.concat([dfL1,dfc1m])
+    dfL1=pd.concat([dfL1,dfsmt])"
+NoVisualizacion;"p_out_sql_cat='Cat'
+p_out_sql_id='VarID'
+p_out_sql_answer='AnswerLabel'
+p_out_sql_lists='Lists'"
+NoVisualizacion;"engine_dv_bbg = create_engine('mssql+pyodbc://TSMMHSQVS901/DV_BBG?driver=SQL+Server+Native+Client+11.0?trusted_connection=yes')
+p_if_exists='fail'
+if p_mode=='r':
+    p_if_exists='replace'
+if p_mode=='a':
+    p_if_exists='append'"
+NoVisualizacion;"review = ""The movie was excellent""
+Image(filename='sentiment_network_pos.png')"
+NoVisualizacion;"X0,y0 = make_blobs(n_samples=100,centers=[[6,6]])
+X1,y1 = make_blobs(n_samples=100,centers=[[7,7]])
+y1 += 1
+X = np.vstack((X0,X1))
+y = np.hstack((y0,y1))"
+NoVisualizacion;"xt1 = sxtrain2[0]
+cimg1 = np.zeros((240,320,3),dtype=np.uint8)
+cimg1[:,:,0] = xt1[0,:,:]
+cimg1[:,:,1] = xt1[1,:,:]
+cimg1[:,:,2] = xt1[2,:,:]"
+NoVisualizacion;"plt.rcParams['image.cmap'] = 'hot'
+plt.rcParams['image.interpolation'] = 'none'
+fig.set_figheight(9)
+fig.set_figwidth(9)
+ind = 0
+flag = 0
+imageinds = [205,55,228,120,2]"
+NoVisualizacion;"S1 = 10
+S2 = 15
+y1 = S1 * x1 + S2 * x2
+cost1 = -y1"
+NoVisualizacion;"plt.rcParams.update({
+        'axes.labelsize': 'large', 
+        'axes.labelweight': 'bold',
+        'axes.titlesize': 'large',
+        'axes.titleweight': 'bold',
+        'legend.fontsize': 'small',
+        'xtick.labelsize': 'large',
+        'ytick.labelsize': 'large',
+    })"
+NoVisualizacion;%pylab inline
+NoVisualizacion;"min_date = adj_price.argmin()
+max_date = adj_price.argmax()
+max_growth_per_year = total_max_growth ** (1.0 / (max_date.year - min_date.year))
+max_growth_per_year"
+NoVisualizacion;"list_variables=tree.findall('.//definition/variable')
+list_categories=tree.findall('.//definition/categories')
+list_fields=tree.findall('.//design/fields')"
+NoVisualizacion;"json_file_path = fpath +'/*'
+lambda_file = lambda json_file_path : glob.glob(json_file_path)"
+NoVisualizacion;"smsdata.columns = [""user_id"",""time"",""incoming"",""dest_user_id_if_known"",""dest_phone_hash""]
+smsdata['type'] = ['sms']*len(smsdata) # this repeats string 'sms' len(smsdata) times
+calldata['type'] = ['call']*len(calldata)
+calldata=calldata.rename(columns = {'time_stamp':'time'})
+comdata = pd.concat([calldata, smsdata])
+comdata=comdata.rename(columns = {'dest_user_id_if_known':'target_id'})
+comdata = comdata.reset_index()"
+NoVisualizacion;new_line = {'Name':'Perov', 'Birth':'22.03.1990', 'City':'Penza'}
+NoVisualizacion;"S1 = tf.Variable(tf.ones([L]))
+O1 = tf.Variable(tf.zeros([L]))
+
+S2 = tf.Variable(tf.ones([M]))
+O2 = tf.Variable(tf.zeros([M]))
+S3 = tf.Variable(tf.ones([N]))
+O3 = tf.Variable(tf.zeros([N]))
+
+S4 = tf.Variable(tf.ones([O]))
+O4 = tf.Variable(tf.zeros([O]))"
+NoVisualizacion;"path_mdd=r'\\TSHAMFIL901\Work\DV\MatthiasH\BBG_Tracking'.replace(chr(92),'/')
+file_mdd=path_mdd+'/'+'data.mdd'
+
+pfad_out=r'\\TSHAMFIL901\Work\DV\MatthiasH\BBG_Tracking\out'.replace(chr(92),'/')
+file_cat_out_csv=pfad_out+'/'+p_out_sql_cat+'.csv'
+file_id_out_csv=pfad_out+'/'+p_out_sql_id+'.csv'
+file_answer_out_csv=pfad_out+'/'+p_out_sql_answer+'.csv'
+file_lists_out_csv=pfad_out+'/'+p_out_sql_lists+'.csv'
+path_bat=r'O:\Work\DV\MatthiasH\BBG_Tracking\out'+chr(92)
+file_bat=path_bat+'/'+'bbg.bat'"
+NoVisualizacion;"tabla=[]
+x=Symbol(""x"")
+x1real=5000
+x2real=0.002
+a,b,c=1,-5000.002,10
+expre=a*(x*x)+b*x+c
+tabla.append([""Primera Formula "","""",""""])
+lit=b*b-4*a*c
+x1=(-b+math.pow(lit ,0.5))/2*a
+Ev= math.fabs(x1real-x1)
+Et=(Ev/x1)*100
+tabla.append([x1real,x1,Et])
+x2=round((-b-math.pow(lit,0.5))/2*a,5 )
+Ev= math.fabs(x2real-x2)
+Et=(Ev/x2)*100
+tabla.append([x2real,x2,Et])
+tabla.append([""Segunda Formula "","""",""""])
+xx1=round((-2*c)/(b+math.pow(lit,0.5)),5)
+Ev= x1real-xx1
+Et=(Ev/xx1)*100
+tabla.append([x1real,xx1,Et])
+xx2=round((-2*c)/(b-math.pow(lit,0.5)),5)
+Ev= x2real-xx2
+Et=(Ev/xx2)*100
+tabla.append([x2real,xx2,Et])"
+NoVisualizacion;"html_template = """"""
+<script type=""text/javascript"" src=""processing.min.js""></script> 
+<script type=""text/javascript"">
+  var processingCode = `{0}`;
+  var myCanvas = document.getElementById(""canvas`{1}`"");
+  var jsCode = Processing.compile(processingCode);
+  var processingInstance = new Processing(myCanvas, jsCode);
+ </script>
+<canvas id=""canvas`{1}`""> </canvas>    
+"""""""
+NoVisualizacion;df=pd.merge(left=df2, right=df1, left_on='TargetID', right_on='TargetID', how='left', suffixes=['','_0'])
+NoVisualizacion;"t = sp.Symbol('t')
+np = 2
+nq = 2
+n = np + nq
+pp = st.symb_vector(""p1:{0}"".format(np+1))
+qq = st.symb_vector(""q1:{0}"".format(nq+1))
+aa = st.symb_vector(""a1:{0}"".format(nq+1))
+ww = st.symb_vector(""w1:{0}"".format(nq+1))"
+NoVisualizacion;"observations = { 'tuberculosis' : 'True', 'smoker' : 'False', 'bronchitis' : 'True' }
+beliefs = map( str, network.forward_backward( observations ) )"
+NoVisualizacion;"data_path = '/home/jorghyq/Project/Gwyddion-Utils/test/20160425-112013_STM--312_1.Z_mtrx'
+c = gwy.gwy_file_load(data_path,gwy.RUN_NONINTERACTIVE)"
+NoVisualizacion;"julio_data = {
+    'blue': [
+    (0.0,   0.0,    1), 
+    (0.333, 0.333,    1), 
+    (0.627,  0.627,    0.701), 
+    (0.863, 0.863,    0.164), 
+    (1,   1,    0.016), 
+    ],
+
+    'green': [
+    (0.0,   1,                    0),
+    (0.067, 1,    0.067),
+    (0.184,  0.917,    0.184),
+    (0.415, 0.623,    0.415), 
+    (0.713,   0.184,                    0.713), 
+    (0.909, 0.027,    0.909),
+    (1,  0.023,  1),
+    ],
+
+    'red': [
+    (1,   0.0,                    0),
+    (0.533, 0.125,    0.125),
+    (0.223,  0.369,     0.369),
+    (0.067, 0.596,    0.596), 
+    (0.023,   0.737,                    0.737), 
+    (0.023, 1,    1)]
+    }"
+NoVisualizacion;"mpl.rcParams['lines.linewidth'] = 2
+font = {'family' : 'sans-serif',
+        'sans-serif' : 'Verdana',
+        'weight' : 'medium',
+        'size'   : '12'}
+params1 = {
+          'axes.labelsize': 12,
+          'text.fontsize': 12,
+          'xtick.labelsize': 12,
+          'xtick.direction': 'out',
+          'ytick.labelsize': 12,
+          'legend.pad': 0.01,     # empty space around the legend box
+          'legend.fontsize': 12,
+          'legend.labelspacing':0.25,
+          'font.size': 12,
+          'font.style': 'normal',
+          'axes.style': 'normal',
+          'xtick.labelstyle': 'normal',
+          }
+mpl.RcParams.update(params1)
+mpl.rc('font', **font)
+plt.rc(""xtick"", direction=""out"")
+plt.rc(""ytick"", direction=""out"")
+plt.rc('legend',**{'fontsize':12})"

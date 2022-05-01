@@ -1,0 +1,38 @@
+{
+        "name": "Task01",
+        "bash": [
+                "!pip install rdflib"
+        ],
+        "author": [
+                "Daniel Rodriguez",
+                "Pepe perez"
+        ],
+        "title": "Task01",
+        "requirements": [
+                {
+                        "name": "rdflib",
+                        "version": "6.1.1"
+                }
+        ],
+        "body": {
+                "calls": [
+                        "rdflib.Graph",
+                        "rdflib.Graph.parse",
+                        "rdflib.Graph.parse",
+                        "print",
+                        "rdflib.Graph.serialize",
+                        "print",
+                        "rdflib.Graph.serialize",
+                        "rdflib.Graph.serialize"
+                ],
+                "store_vars_calls": {
+                        "g": "Graph"
+                }
+        },
+        "description": "**Task 01: Reading and writing RDF files**",
+        "paths": [
+                "https://raw.githubusercontent.com/FacultadInformatica-LinkedData/Curso2021-2022",
+                "/rdf/example1.rdf",
+                "/rdf/example2.rdf"
+        ]
+}
