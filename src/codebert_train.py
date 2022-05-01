@@ -22,7 +22,7 @@ class codebert_train:
         """
 
         # Cargamos la base de datos que vamos a usar para entrenar
-        file = csv.reader(open(ruta+"/src/Entrenamiento/entrenamiento.csv"), delimiter=';')
+        file = csv.reader(open(ruta+"/Entrenamiento/entrenamiento.csv"), delimiter=';')
         labels = []
         celda = []
         next(file)
@@ -35,9 +35,9 @@ class codebert_train:
         #Definimos el tokenizer y el modelo que vamos a usar
         tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
         model = AutoModel.from_pretrained("microsoft/codebert-base")
-        with open(ruta+"/src/Modelos_codebert/tokenizer.pkl", 'wb') as file:
+        with open(ruta+"/Modelos_codebert/tokenizer.pkl", 'wb') as file:
             pickle.dump(tokenizer, file)
-        with open(ruta+"/src/Modelos_codebert/model.pkl", 'wb') as file:
+        with open(ruta+"/Modelos_codebert/model.pkl", 'wb') as file:
             pickle.dump(model, file)
 
         #Realizamos los embeddings de la cadena celda
@@ -64,7 +64,7 @@ class codebert_train:
         DecisionTreeMatthews = codebert_train.getMatthews(y_test, prediction)
         results.append(["Decision Tree", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
         #Guardamos el modelo
-        codebert_train.save_model(ruta+"/src/Modelos_codebert/DecisionTreeClassifier.pkl", clf)
+        codebert_train.save_model(ruta+"/Modelos_codebert/DecisionTreeClassifier.pkl", clf)
 
         #GaussianNB
         clf = GaussianNB()
@@ -76,7 +76,7 @@ class codebert_train:
         GaussianNBMatthews = codebert_train.getMatthews(y_test, GaussianNBPredictions)
         results.append(["GaussianNB", GaussianNBAccuracy, GaussianNBMatthews] + GaussianNBF1)
         #Guardamos el modelo
-        codebert_train.save_model(ruta + "/src/Modelos_codebert/GaussianNB.pkl", clf)
+        codebert_train.save_model(ruta + "/Modelos_codebert/GaussianNB.pkl", clf)
 
         #MLPClassifier
         clf = MLPClassifier(random_state=0, max_iter=300)
@@ -88,7 +88,7 @@ class codebert_train:
         MLPClassifierMatthews = codebert_train.getMatthews(y_test, MLPClassifierPredictions)
         results.append(["MLPClassifier", MLPClassifierAccuracy, MLPClassifierMatthews] + MLPClassifierF1)
         # Guardamos el modelo
-        codebert_train.save_model(ruta + "/src/Modelos_codebert/MLPClassifier.pkl", clf)
+        codebert_train.save_model(ruta + "/Modelos_codebert/MLPClassifier.pkl", clf)
 
         #RandomForest Classifier
         clf = RandomForestClassifier(n_estimators=30, max_depth=4, random_state=1)
@@ -101,10 +101,10 @@ class codebert_train:
         results.append(["RandomForestClassifier", RandomForestClassifierAccuracy,
                         RandomForestClassifierMatthews] + RandomForestClassifierF1)
         # Guardamos el modelo
-        codebert_train.save_model(ruta + "/src/Modelos_codebert/RandomForest.pkl", clf)
+        codebert_train.save_model(ruta + "/Modelos_codebert/RandomForest.pkl", clf)
 
         resultados=pd.DataFrame(results, columns=["Approach", "Accuracy", "Matthews"] + sorted(set(y_test)))
-        resultados.to_csv(ruta + "/src/Modelos_codebert/Resultados.csv")
+        resultados.to_csv(ruta + "/Modelos_codebert/Resultados.csv")
         return 0
 
     def getAccuracy(y_test, predictions):

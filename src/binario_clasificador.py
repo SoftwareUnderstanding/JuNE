@@ -14,7 +14,7 @@ from sklearn import linear_model
 class binario_clasificador:
 
         def embeddings(ruta):
-                file_configuracion = csv.reader(open(ruta + "/src/Entrenamiento/Configuracion.csv"), delimiter=';')
+                file_configuracion = csv.reader(open(ruta + "/Entrenamiento/Configuracion.csv"), delimiter=';')
                 labels_configuracion = []
                 celda_configuracion = []
                 next(file_configuracion)
@@ -27,7 +27,7 @@ class binario_clasificador:
                 print(len(labels_configuracion))
                 print(len(celda_configuracion))
 
-                file_visualizacion= csv.reader(open(ruta + "/src/Entrenamiento/Visualizacion.csv"), delimiter=';')
+                file_visualizacion= csv.reader(open(ruta + "/Entrenamiento/Visualizacion.csv"), delimiter=';')
                 labels_visualizacion = []
                 celda_visualizacion= []
                 next(file_visualizacion)
@@ -39,7 +39,7 @@ class binario_clasificador:
 
                 print(len(labels_visualizacion))
                 print(len(celda_visualizacion))
-                file_procesado= csv.reader(open(ruta + "/src/Entrenamiento/Procesado.csv"), delimiter=';')
+                file_procesado= csv.reader(open(ruta + "/Entrenamiento/Procesado.csv"), delimiter=';')
                 labels_procesado = []
                 celda_procesado= []
                 next(file_procesado)
@@ -118,7 +118,7 @@ class binario_clasificador:
                 DecisionTreeF1 = binario_clasificador.getF1(y_test_config, prediction_config)
                 DecisionTreeMatthews = binario_clasificador.getMatthews(y_test_config, prediction_config)
                 results.append(["Decision Tree_config", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
-                binario_clasificador.save_model(ruta + "/src/Modelos_codebert/DecisionTreeClassifier_config.pkl", clf_config)
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/DecisionTreeClassifier_config.pkl", clf_config)
 
                 print("guardo modelo")
 
@@ -133,7 +133,7 @@ class binario_clasificador:
                 DecisionTreeF1 = binario_clasificador.getF1(y_test_visualizacion, prediction_visualizacion)
                 DecisionTreeMatthews = binario_clasificador.getMatthews(y_test_visualizacion, prediction_visualizacion)
                 results.append(["Decision Tree_visualizacion", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
-                binario_clasificador.save_model(ruta + "/src/Modelos_codebert/DecisionTreeClassifier_visualizacion.pkl",
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/DecisionTreeClassifier_visualizacion.pkl",
                                                 clf_visualizacion)
 
                 # DecisionTreeClassifier
@@ -148,7 +148,7 @@ class binario_clasificador:
                 DecisionTreeMatthews = binario_clasificador.getMatthews(y_test_procesado, prediction_procesado)
                 results.append(
                         ["Decision Tree_visualizacion", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
-                binario_clasificador.save_model(ruta + "/src/Modelos_codebert/DecisionTreeClassifier_procesado.pkl",
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/DecisionTreeClassifier_procesado.pkl",
                                                 clf_procesado)
 
                 #resultados = pd.DataFrame(results, columns=["Approach", "Accuracy", "Matthews"] + sorted(set(y_test)))
@@ -212,16 +212,15 @@ class binario_clasificador:
                 Diccionario que contiene las clasificaciones asi como su numero de celda.
                 """
                 # Aplico el modelo
-                with open(ruta + "/src/Modelos_codebert/DecisionTreeClassifier_config.pkl", 'rb') as file_config:
+                with open(ruta + "/Modelos_codebert/DecisionTreeClassifier_config.pkl", 'rb') as file_config:
                         classifier_config = pickle.load(file_config)
-                with open(ruta + "/src/Modelos_codebert/DecisionTreeClassifier_visualizacion.pkl", 'rb') as file_visualizaciones:
+                with open(ruta + "/Modelos_codebert/DecisionTreeClassifier_visualizacion.pkl", 'rb') as file_visualizaciones:
                         classifier_visualizaciones = pickle.load(file_visualizaciones)
-                with open(ruta + "/src/Modelos_codebert/DecisionTreeClassifier_procesado.pkl", 'rb') as file_procesado:
+                with open(ruta + "/Modelos_codebert/DecisionTreeClassifier_procesado.pkl", 'rb') as file_procesado:
                         classifier_procesado = pickle.load(file_procesado)
-                with open(ruta + "/src/Modelos_codebert/tokenizer.pkl", 'rb') as file:
+                with open(ruta + "/Modelos_codebert/tokenizer.pkl", 'rb') as file:
                         tokenizer = pickle.load(file)
-                # with open(ruta+"/src/Modelos_codebert/model.pkl", 'rb') as file:
-                # model = pickle.load(file)
+
                 model = AutoModel.from_pretrained("microsoft/codebert-base")
                 visualizaciones = 0
                 celdas_visualizaciones = []
@@ -242,7 +241,6 @@ class binario_clasificador:
                         entities_embed = model(entities_tokenize.input_ids)[0].prod(dim=1).detach().numpy()
                         prediccion_config = classifier_config.predict(entities_embed)
                         prediccion_valor= classifier_config.predict_proba(entities_embed)
-                        print(prediccion_valor)
                         prediccion_visualizaciones= classifier_visualizaciones.predict(entities_embed)
                         prediccion_procesado=classifier_procesado.predict(entities_embed)
                         for label in prediccion_config:
@@ -250,20 +248,17 @@ class binario_clasificador:
                                         configuracion += 1
                                         celdas_config.append(t)
 
-                                else:
-                                        print("NO es una celda de configuracion")
+
                         for label in prediccion_visualizaciones:
                                 if (label == 'Visualizacion'):
                                         visualizaciones += 1
                                         celdas_visualizaciones.append(t)
-                                else:
-                                        print("NO es una celda de visualizacion")
+
                         for label in prediccion_procesado:
                                 if (label == 'Procesado'):
                                         procesado += 1
                                         celdas_procesado.append(t)
-                                else:
-                                        print("NO es una celda de procesado")
+
 
 
                 resultados['visualizaciones'] = visualizaciones

@@ -17,7 +17,7 @@ from obtener_metadatos_code import Obtener_metadatos_code as Obtener_metadatos_c
 from futurize import Futurize as Futurize
 from carpeta_tmp import carpeta_tmp as carpeta_tmp
 from codebert_train import codebert_train as codebert_train
-
+from binario_clasificador import binario_clasificador
 
 def crear_output_dir(output_dir, input_path):
     control=os.path.abspath(os.getcwd())
@@ -123,8 +123,8 @@ def main(input_path, tmp_dir, output_dir,inspect):
 
 
                 cadena_analizar=Cargar_datos_code.cargar_jupyter_code_connum(input_path)
-                #resultados2=binario_clasificador.clasificacion(ruta_modelos,cadena_analizar)
-                resultados=codebert_train.clasificacion(ruta_modelos,cadena_analizar)
+                resultados=binario_clasificador.clasificacion(ruta_modelos,cadena_analizar)
+                #resultados=codebert_train.clasificacion(ruta_modelos,cadena_analizar)
 
                 # Escribo el JSON con toda la informacion relevante del notebook
                 Escritura_JSON.escribir_JSON(output_dir,bash, autor, titulo, requerimientos, descripcion,llamadas,

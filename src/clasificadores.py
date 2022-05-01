@@ -22,7 +22,7 @@ class Clasificadores:
         Returns:0
         """
         # Cargo la base de datos y extraigo los datos
-        file = csv.reader(open(ruta+"/src/Entrenamiento/entrenamiento.csv"), delimiter=';')
+        file = csv.reader(open(ruta+"/Entrenamiento/entrenamiento.csv"), delimiter=';')
         tipo = []
         celda = []
         next(file)
@@ -56,7 +56,7 @@ class Clasificadores:
         resultados.append(["DecisionTreeCLassifier", accuracy])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
-        pkl_filename = ruta+"/src/Modelos/TreeDecision.pkl"
+        pkl_filename = ruta+"/Modelos/TreeDecision.pkl"
         with open(pkl_filename, 'wb') as file:
             pickle.dump(classifier, file)
 
@@ -69,7 +69,7 @@ class Clasificadores:
         resultados.append(["LogisticRegression", accuracy])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
-        pkl_filename = ruta+"/src/Modelos/LogisticRegression.pkl"
+        pkl_filename = ruta+"/Modelos/LogisticRegression.pkl"
         with open(pkl_filename, 'wb') as file:
             pickle.dump(classifier, file)
 
@@ -82,7 +82,7 @@ class Clasificadores:
         resultados.append(["GaussianNB", accuracy])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
-        pkl_filename = ruta+"/src/Modelos/GaussianNB.pkl"
+        pkl_filename = ruta+"/Modelos/GaussianNB.pkl"
         with open(pkl_filename, 'wb') as file:
             pickle.dump(classifier, file)
 
@@ -95,7 +95,7 @@ class Clasificadores:
         resultados.append(["MLPClassifier", accuracy])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
-        pkl_filename = ruta+"/src/Modelos/MLPCLassifier.pkl"
+        pkl_filename = ruta+"/Modelos/MLPCLassifier.pkl"
         with open(pkl_filename, 'wb') as file:
             pickle.dump(classifier, file)
 
@@ -108,12 +108,12 @@ class Clasificadores:
         resultados.append(["RandomForest", accuracy])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
-        pkl_filename = ruta+"/src/Modelos/RandomForestClassifier.pkl"
+        pkl_filename = ruta+"/Modelos/RandomForestClassifier.pkl"
         with open(pkl_filename, 'wb') as file:
             pickle.dump(classifier, file)
 
         #Guardo el vectorizador
-        with open(ruta+"/src/Modelos/vectorizer.pkl", 'wb') as file:
+        with open(ruta+"/Modelos/vectorizer.pkl", 'wb') as file:
             pickle.dump(real_vectorizer, file)
 
         return 0
@@ -142,9 +142,9 @@ class Clasificadores:
         Devuelve un diccionario que contiene las predicciones hechas por el clasificador
         """
         # Aplico el modelo
-        with open(ruta+"/src/Modelos/TreeDecision.pkl", 'rb') as file:
+        with open(ruta+"/Modelos/TreeDecision.pkl", 'rb') as file:
             pickle_model = pickle.load(file)
-        with open(ruta+"/src/Modelos/vectorizer.pkl", 'rb') as file:
+        with open(ruta+"/Modelos/vectorizer.pkl", 'rb') as file:
             vector = pickle.load(file)
         visualizaciones = 0
         imports = 0
