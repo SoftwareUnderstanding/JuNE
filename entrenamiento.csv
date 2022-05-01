@@ -1,0 +1,223 @@
+tipo;celda
+Visualizacion;"fig = plt.figure()
+ax = plt.axes()
+plt.grid()
+plt.show()"
+Visualizacion;"plt.figure(figsize=(15,15)) #Ploteamos el panel deseado con las primeras seis iteraciones.
+for i in range(0,6):
+    points = koch(i,TOTALWIDTH,(0,10))
+    plt.subplot(2,3,i+1,aspect='equal')
+    plt.plot(np.asarray(points)[:,0],np.asarray(points)[:,1],color='red')
+    plt.axis('off')
+plt.show()"
+Visualizacion;"alphadeg = np.linspace(0.01, 22.5, 100)
+alpha = np.deg2rad(alphadeg)
+e = 1 - 2*(1 - np.cos(alpha))/(1 - np.cos(alpha)**2)
+e = np.abs(e*100)
+plt.plot(alphadeg, e)
+plt.title('One-dimensional approximation error.')
+plt.xlabel('$\\alpha\>\>[^\circ]$', fontsize=14)
+plt.ylabel(r'$|e|\>\>[\%]$', fontsize=14)
+plt.savefig('tex/figs/q1.pdf')
+plt.show()"
+Visualizacion;"s = nd.get_ramon(token_synapse, channel_synapse, id_synapse[3])
+print s.segments[0]
+vars(s)"
+Visualizacion;"import matplotlib.pyplot as plt
+%matplotlib inline  
+
+nx.draw_networkx(G, width=1, node_size = 100, with_labels=False, pos=nx.fruchterman_reingold_layout(G))#random_layout(G))# fruchterman_reingold_layout(G))
+plt.show()
+nx.draw_networkx(G, width=1, node_size = 100, with_labels=False, pos=nx.random_layout(G))#random_layout(G))
+plt.show()"
+Visualizacion;print '{} seconds elapsed.'.format(time.time()-start)
+Visualizacion;"fig, ax = plt.subplots(2,2, figsize=(12, 7))
+fig.suptitle(""Result for $q_l$"", size=16)
+ax[0, 0].hist(actual_test_values[:, 0], bins=np.linspace(0, 0.02, 40))
+ax[0, 0].set_title('Testing actual values')
+
+ax[0, 1].hist(modeled_test_values[:, 0], bins=np.linspace(0, 0.02, 40))
+ax[0, 1].set_title('Testing modeled values')
+
+ax[1, 0].hist(actual_training_values[:, 0], bins=np.linspace(0, 0.02, 40))
+ax[1, 0].set_title('Training actual values')
+
+ax[1, 1].hist(modeled_training_values[:, 0], bins=np.linspace(0, 0.02, 40))
+ax[1, 1].set_title('Training modeled values')
+plt.show()"
+Visualizacion;"import pandas as pd
+df = pd.read_csv(""weather.csv"")
+df"
+Visualizacion;"melted = pd.melt(df, id_vars=[""day""], var_name='city', value_name='temperature')
+melted"
+Visualizacion;"# objective function & boundaries
+# pprint(mfba.objective)
+df = fbc.cobra_reaction_info(model)
+print(df)
+print(""reactions:"", len(model.reactions))
+print(""metabolites:"", len(model.metabolites))
+print(""genes:"", len(model.genes))"
+Visualizacion;"ex_idx = df.index.str.contains('^EX_')
+df[ex_idx]"
+Visualizacion;"import geopandas as gpd
+from geopandas import GeoDataFrame, read_file
+zipcodes = gpd.GeoDataFrame.from_file('data/ZIP_CODE_040114/ZIP_CODE_040114.shp')
+zipcodes = zipcodes.to_crs(epsg=4326) # apparently required by CartoBD, according to http://gis.stackexchange.com/questions/159681/geopandas-cant-save-geojson
+zipcodes.columns"
+Visualizacion;"for idx, diff in most_improved[:3000]:
+    source_len = len(source_lines[idx].split())
+    target_len = len(ref_lines[idx].split())
+    edit_distance = get_editdistance(baseline_hyp_lines[idx], ref_lines[idx])
+#     print(edit_distance)
+    if (target_len > 10
+    and target_len < 30
+    and len(constraints[idx]) > 1
+    and edit_distance >= 0.5):
+        print(u'S1: {} S2: {}'.format(baseline_scores[idx], constrained_scores[idx]))
+        print(u'Source: {}'.format(source_lines[idx]))
+        print(u'Hyp1: {}'.format(baseline_hyp_lines[idx]))
+        print(u'Constraints: {}'.format(constraints[idx]))
+        print(u'Hyp2: {}'.format(constrained_hyp_lines[idx]))
+        print(u'Ref: {}\n'.format(ref_lines[idx]))"
+Visualizacion;"# index four is the center crop
+image = net.blobs['data'].data[4].copy()
+image -= image.min()
+image /= image.max()
+showimage(image.transpose(1, 2, 0))"
+Visualizacion;"filters = net.params['conv1'][0].data
+vis_square(filters.transpose(0, 2, 3, 1))"
+Import;"import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import math"
+Import;"import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+%matplotlib inline"
+Import;"import numpy as np
+import ndio.remote.neurodata as neurodata
+import ndio.ramon as ramon
+import time
+import ndio
+import networkx as nx
+start = time.time()
+
+token_synapse = 'kasthuri2015_ramon_v4'
+channel_synapse = 'synapses'
+
+token_neurons = 'kasthuri2015_ramon_v4'
+channel_neurons = 'neurons'
+
+res = 3"
+Import;"from IPython.display import HTML
+HTML('''<script>
+code_show=true; 
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+} 
+$( document ).ready(code_toggle);
+</script>
+<i>The raw code for this IPython notebook is by default hidden for easier reading.
+To toggle on/off the raw code, click </i> <a href=""javascript:code_toggle()"">here</a>.''')"
+Import;"import pandas as pd
+import numpy as np
+import json
+import urllib
+import requests
+import json"
+Import;from machine_translation.evaluation import sentence_level_bleu, mteval_13
+Import;"import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+# Make sure that caffe is on the python path:
+caffe_root = '../'  # this file is expected to be in {caffe_root}/examples
+import sys
+sys.path.insert(0, caffe_root + 'python')
+
+import caffe
+
+plt.rcParams['figure.figsize'] = (10, 10)
+plt.rcParams['image.interpolation'] = 'nearest'
+plt.rcParams['image.cmap'] = 'gray'"
+Import;"# Makes possible to show the output from matplotlib inline
+%matplotlib inline
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import matplotlib
+
+# Makes the figures in the PNG format:
+# For more information see %config InlineBackend
+%config InlineBackend.figure_formats=set([u'png'])
+
+# plt.rcParams['figure.figsize'] = 5, 10
+
+import numpy
+import sys
+import os
+import scipy
+from scipy import stats
+
+import save_load_file as slf"
+Import;from datetime import datetime
+Import;"%matplotlib inline
+import numpy as np
+import scipy as sp
+import matplotlib as mpl
+import matplotlib.cm as cm
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+from six.moves import range
+
+# Setup Pandas
+pd.set_option('display.width', 500)
+pd.set_option('display.max_columns', 100)
+pd.set_option('display.notebook_repr_html', True)
+
+# Setup Seaborn
+sns.set_style(""whitegrid"")
+sns.set_context(""poster"")"
+Import;"import tensorflow as tf
+import math"
+Import;import matplotlib.pyplot as plt
+Import;"pip install rdflib
+github_storage = ""https://raw.githubusercontent.com/FacultadInformatica-LinkedData/Curso2021-2022/master/Assignment4/course_materials"""
+Import;"import pandas as pd
+import numpy as np
+import csv
+
+from os import listdir
+from os.path import isfile, join
+#from torch.utils.tensorboard import SummaryWriter
+import datajourney as DJ
+import rdflib
+import networkx.drawing, networkx.drawing.nx_agraph as ag
+
+from pyrdf2vec import RDF2VecTransformer
+from pyrdf2vec.embedders import Word2Vec
+from pyrdf2vec.graphs import KG, Vertex
+from pyrdf2vec.walkers import RandomWalker, Walker
+
+import pygraphviz
+
+from sklearn.naive_bayes import GaussianNB
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import SVC, LinearSVC
+from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+import sklearn.metrics
+from sklearn import tree
+from sklearn import linear_model
+from sklearn.model_selection import train_test_split
+#
+from transformers import AutoTokenizer, AutoModelForMaskedLM"
+Import;"import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt "
