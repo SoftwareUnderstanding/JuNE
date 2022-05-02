@@ -123,7 +123,6 @@ def main(input_path, tmp_dir, output_dir,inspect):
 
 
                 cadena_analizar=Cargar_datos_code.cargar_jupyter_code_connum(input_path)
-                print(cadena_analizar)
                 resultados=binario_clasificador.clasificacion(ruta_modelos,cadena_analizar)
                 #resultados=codebert_train.clasificacion(ruta_modelos,cadena_analizar)
 
@@ -157,7 +156,6 @@ def main(input_path, tmp_dir, output_dir,inspect):
                 # Obtengo las lineas de codigo bash depurando antes las lineas para eliminar saltos de linea
                 bash = Obtener_imports_bashcode.obtener_bash_code(cadena_source)
                 cadena_paths = Extraer_paths.extraer_path(cadena_source)
-
                 # Llamo al clasificador para clasificar las celdas.
                 ruta_modelos = os.path.abspath(os.path.dirname(__file__))
                 visualizaciones=0
