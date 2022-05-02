@@ -123,6 +123,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
 
 
                 cadena_analizar=Cargar_datos_code.cargar_jupyter_code_connum(input_path)
+                print(cadena_analizar)
                 resultados=binario_clasificador.clasificacion(ruta_modelos,cadena_analizar)
                 #resultados=codebert_train.clasificacion(ruta_modelos,cadena_analizar)
 

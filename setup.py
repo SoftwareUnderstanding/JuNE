@@ -1,6 +1,6 @@
 import os
 from distutils.core import setup
-from setuptools import find_packages  # type: ignore
+from setuptools import find_packages
 
 
 def read(fname):
