@@ -47,6 +47,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
 
     #Compruebo si el directorio de entrada existe
     #COmentario prueba
+    #COMENTARIO PRUEBA2
     if os.path.isfile(input_path):
         #Compruebo si el archivo no esta vacio
         if os.stat(input_path).st_size!=0:
