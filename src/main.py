@@ -18,6 +18,7 @@ from futurize import Futurize as Futurize
 from carpeta_tmp import carpeta_tmp as carpeta_tmp
 from codebert_train import codebert_train as codebert_train
 from binario_clasificador import binario_clasificador
+from clasificadores import Clasificadores as Clasificadores
 
 def crear_output_dir(output_dir, input_path):
     control=os.path.abspath(os.getcwd())
@@ -111,7 +112,11 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     ruta_modelos= os.path.abspath(os.path.dirname(__file__))
                     visualizaciones=0;
                     imports=0;
+
+                    #Bag of words
+                    # Clasificadores.tokenizar(ruta_modelos)
                     #visualizaciones,imports=clasificadores.clasificacion(ruta_modelos,cadena_source)
+
 
                     #CLASIFICADOR MULTIVARIANTE
                     #codebert_train.entrenamiento(ruta_modelos)

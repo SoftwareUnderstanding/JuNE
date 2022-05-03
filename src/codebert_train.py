@@ -62,7 +62,7 @@ class codebert_train:
         DecisionTreeAccuracy = codebert_train.getAccuracy(y_test, prediction)
         DecisionTreeF1 = codebert_train.getF1(y_test, prediction)
         DecisionTreeMatthews = codebert_train.getMatthews(y_test, prediction)
-        results.append(["Decision Tree", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
+        results.append(["Multiclase","Decision Tree", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
         #Guardamos el modelo
         codebert_train.save_model(ruta+"/Modelos_codebert/DecisionTreeClassifier.pkl", clf)
 
@@ -74,7 +74,7 @@ class codebert_train:
         GaussianNBAccuracy = codebert_train.getAccuracy(y_test, GaussianNBPredictions)
         GaussianNBF1 = codebert_train.getF1(y_test, GaussianNBPredictions)
         GaussianNBMatthews = codebert_train.getMatthews(y_test, GaussianNBPredictions)
-        results.append(["GaussianNB", GaussianNBAccuracy, GaussianNBMatthews] + GaussianNBF1)
+        results.append(["Multiclase","GaussianNB", GaussianNBAccuracy, GaussianNBMatthews] + GaussianNBF1)
         #Guardamos el modelo
         codebert_train.save_model(ruta + "/Modelos_codebert/GaussianNB.pkl", clf)
 
@@ -86,7 +86,7 @@ class codebert_train:
         MLPClassifierAccuracy = codebert_train.getAccuracy(y_test, MLPClassifierPredictions)
         MLPClassifierF1 = codebert_train.getF1(y_test, MLPClassifierPredictions)
         MLPClassifierMatthews = codebert_train.getMatthews(y_test, MLPClassifierPredictions)
-        results.append(["MLPClassifier", MLPClassifierAccuracy, MLPClassifierMatthews] + MLPClassifierF1)
+        results.append(["Multiclase","MLPClassifier", MLPClassifierAccuracy, MLPClassifierMatthews] + MLPClassifierF1)
         # Guardamos el modelo
         codebert_train.save_model(ruta + "/Modelos_codebert/MLPClassifier.pkl", clf)
 
@@ -98,13 +98,13 @@ class codebert_train:
         RandomForestClassifierAccuracy = codebert_train.getAccuracy(y_test, RandomForestClassifierPredictions)
         RandomForestClassifierF1 = codebert_train.getF1(y_test, RandomForestClassifierPredictions)
         RandomForestClassifierMatthews = codebert_train.getMatthews(y_test, RandomForestClassifierPredictions)
-        results.append(["RandomForestClassifier", RandomForestClassifierAccuracy,
+        results.append(["Multiclase","RandomForestClassifier", RandomForestClassifierAccuracy,
                         RandomForestClassifierMatthews] + RandomForestClassifierF1)
         # Guardamos el modelo
         codebert_train.save_model(ruta + "/Modelos_codebert/RandomForest.pkl", clf)
 
-        resultados=pd.DataFrame(results, columns=["Approach", "Accuracy", "Matthews"] + sorted(set(y_test)))
-        resultados.to_csv(ruta + "/Modelos_codebert/Resultados.csv")
+        resultados=pd.DataFrame(results, columns=["Clasificador","Approach", "Accuracy", "Matthews"] + sorted(set(y_test)))
+        resultados.to_csv(ruta + "/Modelos_codebert/Resultados_multiclasificador.csv")
         return 0
 
     def getAccuracy(y_test, predictions):

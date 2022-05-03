@@ -1,4 +1,6 @@
 import csv
+
+import sklearn
 from sklearn import tree
 from sklearn.model_selection import train_test_split
 import os
@@ -10,6 +12,8 @@ from sklearn.svm import SVC, LinearSVC
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 import pickle
+from sklearn.naive_bayes import GaussianNB
+import pandas as pd
 import glob
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -51,48 +55,46 @@ class Clasificadores:
         classifier = tree.DecisionTreeClassifier()
         classifier.fit(train_X, train_labels)
         predicciones = classifier.predict(test_X)
+        DecisionTreeAccuracy = Clasificadores.getAccuracy(test_labels, predicciones)
+        DecisionTreeF1 = Clasificadores.getF1(test_labels, predicciones)
+        DecisionTreeMatthews = Clasificadores.getMatthews(test_labels, predicciones)
         accuracy = accuracy_score(test_labels, predicciones)
         # Almaceno la precision del clasificador DecisionTreeCLassifier
-        resultados.append(["DecisionTreeCLassifier", accuracy])
+        resultados.append(["Bag of words","DecisionTreeCLassifier", DecisionTreeAccuracy,DecisionTreeMatthews]+DecisionTreeF1)
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
         pkl_filename = ruta+"/Modelos/TreeDecision.pkl"
         with open(pkl_filename, 'wb') as file:
             pickle.dump(classifier, file)
 
-        # LogisticRegression
-        classifier = linear_model.LogisticRegression(random_state=0)
+        """
+        # GaussianNB
+        classifier = GaussianNB()
         classifier.fit(train_X, train_labels)
         predicciones = classifier.predict(test_X)
+        GaussianNBAccuracy = Clasificadores.getAccuracy(test_labels, predicciones)
+        GaussianNBF1 = Clasificadores.getF1(test_labels, predicciones)
+        GaussianNBMatthews = Clasificadores.getMatthews(test_labels, predicciones)
         accuracy = accuracy_score(test_labels, predicciones)
         # Almaceno la precision del clasificador LogisticRegression
-        resultados.append(["LogisticRegression", accuracy])
-        print(f"Accuracy: {accuracy:.4%}")
-        # Guardo el modelo utilizado utilizando pickle
-        pkl_filename = ruta+"/Modelos/LogisticRegression.pkl"
-        with open(pkl_filename, 'wb') as file:
-            pickle.dump(classifier, file)
-
-        # GaussianNB
-        classifier = LinearSVC()
-        classifier.fit(train_X, train_labels)
-        predicciones = classifier.predict(test_X)
-        accuracy = accuracy_score(test_labels, predicciones)
-        # Almaceno la precision del clasificador GaussianNB
-        resultados.append(["GaussianNB", accuracy])
+        resultados.append(["Bag of words","GaussianNB", GaussianNBAccuracy,GaussianNBMatthews]+GaussianNBF1)
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
         pkl_filename = ruta+"/Modelos/GaussianNB.pkl"
         with open(pkl_filename, 'wb') as file:
             pickle.dump(classifier, file)
 
+        """
         # MLPClassifier
         classifier = MLPClassifier(random_state=0, max_iter=300)
         classifier.fit(train_X, train_labels)
         predicciones = classifier.predict(test_X)
+        MLPClassifierAccuracy = Clasificadores.getAccuracy(test_labels, predicciones)
+        MLPClassifierF1 = Clasificadores.getF1(test_labels, predicciones)
+        MLPClassifierMatthews = Clasificadores.getMatthews(test_labels, predicciones)
         accuracy = accuracy_score(test_labels, predicciones)
         # Almaceno la precision del clasificador MLPClassifer
-        resultados.append(["MLPClassifier", accuracy])
+        resultados.append(["Bag of words", "MLPCLassifier", MLPClassifierAccuracy, MLPClassifierMatthews] + MLPClassifierF1)
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
         pkl_filename = ruta+"/Modelos/MLPCLassifier.pkl"
@@ -103,9 +105,12 @@ class Clasificadores:
         classifier = RandomForestClassifier(n_estimators=30, max_depth=4, random_state=1)
         classifier.fit(train_X, train_labels)
         predicciones = classifier.predict(test_X)
+        RandomForestClassifierAccuracy = Clasificadores.getAccuracy(test_labels, predicciones)
+        RandomForestClassifierF1 = Clasificadores.getF1(test_labels, predicciones)
+        RandomForestClassifierMatthews = Clasificadores.getMatthews(test_labels, predicciones)
         accuracy = accuracy_score(test_labels, predicciones)
         # Almaceno la precision del clasificador RandomForestClassifer
-        resultados.append(["RandomForest", accuracy])
+        resultados.append(["Bag of words", "RandomForest", RandomForestClassifierAccuracy, RandomForestClassifierMatthews] + RandomForestClassifierF1)
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
         pkl_filename = ruta+"/Modelos/RandomForestClassifier.pkl"
@@ -116,7 +121,46 @@ class Clasificadores:
         with open(ruta+"/Modelos/vectorizer.pkl", 'wb') as file:
             pickle.dump(real_vectorizer, file)
 
+        resultados_final = pd.DataFrame(resultados, columns=["Clasificador","Approach", "Accuracy", "Matthews"] + sorted(set(test_labels)))
+        resultados_final.to_csv(ruta + "/Modelos_codebert/Resultadosbagofwords.csv")
+
         return 0
+
+    def getAccuracy(y_test, predictions):
+        """
+        Método encargado de calcular la precision de un clasificador en base a sus predicciones.
+        Args:
+            predictions: Predicciones realizadas por el clasificador para el conjunto de test
+
+        Returns:
+        Devuelve las metricas asociadas al clasificador.
+        """
+        return sklearn.metrics.accuracy_score(y_test, predictions, normalize=True, sample_weight=None)
+
+    def getF1(y_test, predictions):
+        """
+        Método encargado de calcular el valor F1 para un clasificador
+        Args:
+            predictions: Predicciones realizadas por el clasificador para el conjunto de test
+
+        Returns:
+        El valor calculado para F1
+        """
+        f1 = []
+        for l in sorted(set(y_test)):
+            f1.append(sklearn.metrics.f1_score(y_test, predictions, labels=[l], average='micro'))
+        return f1
+
+    def getMatthews(y_test, predictions):
+        """
+        Método encargado de calcular el valor Matthews para un clasificador
+        Args:
+            predictions: Predicciones realizadas por el clasificador para el conjunto de test
+
+        Returns:
+         El valor calculado para Matthews
+        """
+        return sklearn.metrics.matthews_corrcoef(y_test, predictions)
 
     def tokenize(sentence):
         punctuation = set(string.punctuation)

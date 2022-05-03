@@ -19,13 +19,12 @@ class binario_clasificador:
                 celda_configuracion = []
                 next(file_configuracion)
                 # Recorremos el csv y guardamos los valores
-                print("hola")
+
                 for line in file_configuracion:
                         labels_configuracion.append(line[0])
                         celda_configuracion.append(line[1])
 
-                print(len(labels_configuracion))
-                print(len(celda_configuracion))
+
 
                 file_visualizacion= csv.reader(open(ruta + "/Entrenamiento/Visualizacion.csv"), delimiter=';')
                 labels_visualizacion = []
@@ -37,8 +36,7 @@ class binario_clasificador:
                         labels_visualizacion.append(line[0])
                         celda_visualizacion.append(line[1])
 
-                print(len(labels_visualizacion))
-                print(len(celda_visualizacion))
+
                 file_procesado= csv.reader(open(ruta + "/Entrenamiento/Procesado.csv"), delimiter=';')
                 labels_procesado = []
                 celda_procesado= []
@@ -80,7 +78,7 @@ class binario_clasificador:
                         dim=1).detach().numpy()
                 entity_classes_procesado = labels_procesado
 
-                print("hago embeddings")
+
 
                 return entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion,\
                        entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado
@@ -117,10 +115,10 @@ class binario_clasificador:
                 DecisionTreeAccuracy = binario_clasificador.getAccuracy(y_test_config, prediction_config)
                 DecisionTreeF1 = binario_clasificador.getF1(y_test_config, prediction_config)
                 DecisionTreeMatthews = binario_clasificador.getMatthews(y_test_config, prediction_config)
-                results.append(["Decision Tree_config", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
-                binario_clasificador.save_model(ruta + "/Modelos_codebert/DecisionTreeClassifier_config.pkl", clf_config)
+                results.append(["Decision Tree_configuracion", DecisionTreeAccuracy, DecisionTreeMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/DecisionTreeClassifier_config.pkl", clf_config)
 
-                print("guardo modelo")
+
 
                 # DecisionTreeClassifier
                 clf_visualizacion = tree.DecisionTreeClassifier()
@@ -132,8 +130,8 @@ class binario_clasificador:
                 DecisionTreeAccuracy = binario_clasificador.getAccuracy(y_test_visualizacion, prediction_visualizacion)
                 DecisionTreeF1 = binario_clasificador.getF1(y_test_visualizacion, prediction_visualizacion)
                 DecisionTreeMatthews = binario_clasificador.getMatthews(y_test_visualizacion, prediction_visualizacion)
-                results.append(["Decision Tree_visualizacion", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
-                binario_clasificador.save_model(ruta + "/Modelos_codebert/DecisionTreeClassifier_visualizacion.pkl",
+                results.append(["Decision Tree_visualizacion", DecisionTreeAccuracy, DecisionTreeMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/DecisionTreeClassifier_visualizacion.pkl",
                                                 clf_visualizacion)
 
                 # DecisionTreeClassifier
@@ -147,12 +145,140 @@ class binario_clasificador:
                 DecisionTreeF1 = binario_clasificador.getF1(y_test_procesado, prediction_procesado)
                 DecisionTreeMatthews = binario_clasificador.getMatthews(y_test_procesado, prediction_procesado)
                 results.append(
-                        ["Decision Tree_visualizacion", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
-                binario_clasificador.save_model(ruta + "/Modelos_codebert/DecisionTreeClassifier_procesado.pkl",
+                        ["Decision Tree_procesado", DecisionTreeAccuracy, DecisionTreeMatthews] )
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/DecisionTreeClassifier_procesado.pkl",
+                                                clf_procesado)
+                #GaussianNB
+                clf_config = GaussianNB()
+                clf_config.fit(X_train_config, y_train_config)
+                prediction_config = clf_config.predict(X_test_config)
+                accuracy = accuracy_score(y_test_config, prediction_config)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                GaussianNBAccuracy = binario_clasificador.getAccuracy(y_test_config, prediction_config)
+                GaussianNBF1 = binario_clasificador.getF1(y_test_config, prediction_config)
+                GaussianNBMatthews = binario_clasificador.getMatthews(y_test_config, prediction_config)
+                results.append(["GaussianNB_config", GaussianNBAccuracy, GaussianNBMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/GaussianNBClassifier_config.pkl",
+                                                clf_config)
+
+                # GaussianNB
+                clf_visualizacion = GaussianNB()
+                clf_visualizacion.fit(X_train_visualizacion, y_train_visualizacion)
+                prediction_visualizacion = clf_visualizacion.predict(X_test_visualizacion)
+                accuracy = accuracy_score(y_test_visualizacion, prediction_visualizacion)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                GaussianNBAccuracy = binario_clasificador.getAccuracy(y_test_visualizacion, prediction_visualizacion)
+                GaussianNBF1 = binario_clasificador.getF1(y_test_visualizacion, prediction_visualizacion)
+                GaussianNBMatthews= binario_clasificador.getMatthews(y_test_visualizacion, prediction_visualizacion)
+                results.append(["GaussianNB_visualizacion", GaussianNBAccuracy, GaussianNBMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/GaussianNB_visualizacion.pkl",
+                                                clf_visualizacion)
+
+                # GaussianNB
+                clf_procesado = GaussianNB()
+                clf_procesado.fit(X_train_procesado, y_train_procesado)
+                prediction_procesado = clf_procesado.predict(X_test_procesado)
+                accuracy = accuracy_score(y_test_procesado, prediction_procesado)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                GaussianNBAccuracy = binario_clasificador.getAccuracy(y_test_procesado, prediction_procesado)
+                GaussianNBTreeF1 = binario_clasificador.getF1(y_test_procesado, prediction_procesado)
+                GaussianNBTreeMatthews = binario_clasificador.getMatthews(y_test_procesado, prediction_procesado)
+                results.append(
+                        ["GaussianNB_procesado", GaussianNBAccuracy, GaussianNBMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/GaussianNB_procesado.pkl",
                                                 clf_procesado)
 
-                #resultados = pd.DataFrame(results, columns=["Approach", "Accuracy", "Matthews"] + sorted(set(y_test)))
-                #resultados.to_csv(ruta + "/src/Modelos_codebert/Resultados.csv")
+                # MLPCLassifier
+                clf_config = MLPClassifier(random_state=0, max_iter=300)
+                clf_config.fit(X_train_config, y_train_config)
+                prediction_config = clf_config.predict(X_test_config)
+                accuracy = accuracy_score(y_test_config, prediction_config)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                MLPClassifierAccuracy = binario_clasificador.getAccuracy(y_test_config, prediction_config)
+                MLPClassifierF1 = binario_clasificador.getF1(y_test_config, prediction_config)
+                MLPClassifierMatthews = binario_clasificador.getMatthews(y_test_config, prediction_config)
+                results.append(["MLPClassifier_configuracion", MLPClassifierAccuracy, MLPClassifierMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/MLPClassifier_config.pkl",
+                                                clf_config)
+
+                # MLPClassifier
+                clf_visualizacion = MLPClassifier(random_state=0, max_iter=300)
+                clf_visualizacion.fit(X_train_visualizacion, y_train_visualizacion)
+                prediction_visualizacion = clf_visualizacion.predict(X_test_visualizacion)
+                accuracy = accuracy_score(y_test_visualizacion, prediction_visualizacion)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                MLPClassifierAccuracy = binario_clasificador.getAccuracy(y_test_visualizacion, prediction_visualizacion)
+                MLPClassifierF1 = binario_clasificador.getF1(y_test_visualizacion, prediction_visualizacion)
+                MLPClassifierMatthews = binario_clasificador.getMatthews(y_test_visualizacion, prediction_visualizacion)
+                results.append(["MLPClassifier_visualizacion", MLPClassifierAccuracy, MLPClassifierMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/MLPClassifier_visualizacion.pkl",
+                                                clf_visualizacion)
+
+                # MLPClassifier
+                clf_procesado = MLPClassifier(random_state=0, max_iter=300)
+                clf_procesado.fit(X_train_procesado, y_train_procesado)
+                prediction_procesado = clf_procesado.predict(X_test_procesado)
+                accuracy = accuracy_score(y_test_procesado, prediction_procesado)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                MLPClassifierAccuracy = binario_clasificador.getAccuracy(y_test_procesado, prediction_procesado)
+                MLPClassifierF1 = binario_clasificador.getF1(y_test_procesado, prediction_procesado)
+                MLPClassifierMatthews = binario_clasificador.getMatthews(y_test_procesado, prediction_procesado)
+                results.append(
+                        ["MLPCLassifier_procesado", MLPClassifierAccuracy, MLPClassifierMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/MLPClassifier_procesado.pkl",
+                                                clf_procesado)
+
+                # RandomForestClassifier
+                clf_config = RandomForestClassifier(n_estimators=30, max_depth=4, random_state=1)
+                clf_config.fit(X_train_config, y_train_config)
+                prediction_config = clf_config.predict(X_test_config)
+                accuracy = accuracy_score(y_test_config, prediction_config)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                RandomForestClassifierAccuracy = binario_clasificador.getAccuracy(y_test_config, prediction_config)
+                RandomForestClassifierF1 = binario_clasificador.getF1(y_test_config, prediction_config)
+                RandomForestClassifierMatthews = binario_clasificador.getMatthews(y_test_config, prediction_config)
+                results.append(["RandomForestClassifier_config", RandomForestClassifierAccuracy, RandomForestClassifierMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/RandomForestClassifier_config.pkl",
+                                                clf_config)
+
+                # RandomForestClassifier
+                clf_visualizacion = RandomForestClassifier(n_estimators=30, max_depth=4, random_state=1)
+                clf_visualizacion.fit(X_train_visualizacion, y_train_visualizacion)
+                prediction_visualizacion = clf_visualizacion.predict(X_test_visualizacion)
+                accuracy = accuracy_score(y_test_visualizacion, prediction_visualizacion)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                RandomForestClassifierAccuracy = binario_clasificador.getAccuracy(y_test_visualizacion, prediction_visualizacion)
+                RandomForestClassifierF1 = binario_clasificador.getF1(y_test_visualizacion, prediction_visualizacion)
+                RandomForestClassifierMatthews = binario_clasificador.getMatthews(y_test_visualizacion, prediction_visualizacion)
+                results.append(["RandomForestClassifier_visualizacion", RandomForestClassifierAccuracy, RandomForestClassifierMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/RandomForestClassifier_visualizacion.pkl",
+                                                clf_visualizacion)
+
+                # RandomForestClassifier
+                clf_procesado = RandomForestClassifier(n_estimators=30, max_depth=4, random_state=1)
+                clf_procesado.fit(X_train_procesado, y_train_procesado)
+                prediction_procesado = clf_procesado.predict(X_test_procesado)
+                accuracy = accuracy_score(y_test_procesado, prediction_procesado)
+                print(f"Accuracy: {accuracy:.4%}")
+                # Guardamos los resultados del clasificador
+                RandomForestClassifierAccuracy = binario_clasificador.getAccuracy(y_test_procesado, prediction_procesado)
+                RandomForestClassifierF1 = binario_clasificador.getF1(y_test_procesado, prediction_procesado)
+                RandomForestClassifierMatthews = binario_clasificador.getMatthews(y_test_procesado, prediction_procesado)
+                results.append(
+                        ["RandomForest_procesado", RandomForestClassifierAccuracy, RandomForestClassifierMatthews])
+                binario_clasificador.save_model(ruta + "/Modelos_codebert/clasificadores_binarios/RandomForestClassifier_procesado.pkl",
+                                                clf_procesado)
+
+                resultados = pd.DataFrame(results, columns=["Approach", "Accuracy", "Matthews"] )
+                resultados.to_csv(ruta + "/Modelos_codebert/Resultados_binario.csv")
                 return 0
 
         def getAccuracy(y_test, predictions):
@@ -212,11 +338,11 @@ class binario_clasificador:
                 Diccionario que contiene las clasificaciones asi como su numero de celda.
                 """
                 # Aplico el modelo
-                with open(ruta + "/Modelos_codebert/DecisionTreeClassifier_config.pkl", 'rb') as file_config:
+                with open(ruta + "/Modelos_codebert/clasificadores_binarios/DecisionTreeClassifier_config.pkl", 'rb') as file_config:
                         classifier_config = pickle.load(file_config)
-                with open(ruta + "/Modelos_codebert/DecisionTreeClassifier_visualizacion.pkl", 'rb') as file_visualizaciones:
+                with open(ruta + "/Modelos_codebert/clasificadores_binarios/DecisionTreeClassifier_visualizacion.pkl", 'rb') as file_visualizaciones:
                         classifier_visualizaciones = pickle.load(file_visualizaciones)
-                with open(ruta + "/Modelos_codebert/DecisionTreeClassifier_procesado.pkl", 'rb') as file_procesado:
+                with open(ruta + "/Modelos_codebert/clasificadores_binarios/DecisionTreeClassifier_procesado.pkl", 'rb') as file_procesado:
                         classifier_procesado = pickle.load(file_procesado)
                 with open(ruta + "/Modelos_codebert/tokenizer.pkl", 'rb') as file:
                         tokenizer = pickle.load(file)
