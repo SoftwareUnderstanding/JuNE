@@ -25,3 +25,4 @@ class Futurize:
 
         except:
             print("Error en futurize")
+            return -1
