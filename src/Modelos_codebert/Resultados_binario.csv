@@ -1,0 +1,13 @@
+,Approach,Accuracy,Matthews
+0,Decision Tree_configuracion,0.5,0.07098646750254821
+1,Decision Tree_visualizacion,0.6666666666666666,0.32732683535398854
+2,Decision Tree_procesado,0.7666666666666667,0.5361185533187384
+3,GaussianNB_config,0.5,-0.07098646750254821
+4,GaussianNB_visualizacion,0.5333333333333333,0.25
+5,GaussianNB_procesado,0.6,0.25
+6,MLPClassifier_configuracion,0.5666666666666667,0.0
+7,MLPClassifier_visualizacion,0.4666666666666667,0.0
+8,MLPCLassifier_procesado,0.43333333333333335,-0.19851666679418603
+9,RandomForestClassifier_config,0.6333333333333333,0.27865801780244004
+10,RandomForestClassifier_visualizacion,0.6333333333333333,0.27865801780244004
+11,RandomForest_procesado,0.8666666666666667,0.7321428571428571
