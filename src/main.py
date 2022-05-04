@@ -121,7 +121,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     #CLASIFICADOR MULTIVARIANTE
                     #codebert_train.entrenamiento(ruta_modelos)
 
-                    #CLASIFICADOR BINARIO
+                    #CLASIFICADORES BINARIO
                     #Esta es la llamada que se realiza para la obtencion del entrenamiento de los clasificadores
                     entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
                     entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado= binario_clasificador.embeddings(ruta_modelos)

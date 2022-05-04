@@ -15,7 +15,7 @@ class binario_clasificador:
                 """
                 Método encargado de realizar los embeddings para el posterior entrenamiento del clasificador.
                 Se realizan los embeddings pertenecientes a los tres archivos de entrenamiento Configuracion.csv,
-                Visualizacion.csv y Procesado.csv
+                Visualizacion.csv y Procesado.csv.
                 :return:
                 El conjunto de tuplas de embeddings con los correspondientes labels.
                 """
