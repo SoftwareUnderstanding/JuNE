@@ -1,5 +1,4 @@
 import csv
-
 import sklearn
 from sklearn import tree
 from sklearn.model_selection import train_test_split
@@ -7,14 +6,10 @@ import os
 from sklearn.metrics import accuracy_score
 import string
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn import linear_model
-from sklearn.svm import SVC, LinearSVC
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 import pickle
-from sklearn.naive_bayes import GaussianNB
 import pandas as pd
-import glob
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 

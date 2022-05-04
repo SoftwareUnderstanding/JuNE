@@ -122,14 +122,16 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     #codebert_train.entrenamiento(ruta_modelos)
 
                     #CLASIFICADOR BINARIO
-                    #entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
-                    #entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado= binario_clasificador.embeddings(ruta_modelos)
+                    #Esta es la llamada que se realiza para la obtencion del entrenamiento de los clasificadores
+                    entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
+                    entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado= binario_clasificador.embeddings(ruta_modelos)
 
-                    #binario_clasificador.entrenamiento(ruta_modelos,entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
-                    #entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado)
+                    binario_clasificador.entrenamiento(ruta_modelos,entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
+                    entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado)
 
-
+                    #Cargo las celdas del notebook a analizar y sus numeros de celda
                     cadena_analizar=Cargar_datos_code.cargar_jupyter_code_connum(input_path)
+                    #Llamo al metodo correspondiente para clasificar las celdas
                     resultados=binario_clasificador.clasificacion(ruta_modelos,cadena_analizar)
                     #resultados=codebert_train.clasificacion(ruta_modelos,cadena_analizar)
 
@@ -167,9 +169,29 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     ruta_modelos = os.path.abspath(os.path.dirname(__file__))
                     visualizaciones=0
                     imports=0
-                    #visualizaciones, imports = clasificadores.clasificacion(ruta_modelos, cadena_source)
+                    # Bag of words
+                    # Clasificadores.tokenizar(ruta_modelos)
+                    # visualizaciones,imports=clasificadores.clasificacion(ruta_modelos,cadena_source)
+
+                    # CLASIFICADOR MULTIVARIANTE
+                    # codebert_train.entrenamiento(ruta_modelos)
+
+                    # CLASIFICADOR BINARIO
+                    #Esta es la llamada que se realiza para la obtencion del entrenamiento de los clasificadores
+                    entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
+                    entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado = binario_clasificador.embeddings(
+                        ruta_modelos)
+
+                    binario_clasificador.entrenamiento(ruta_modelos, entities_embed_configuracion,
+                                                       entity_classes_configuracion, entities_embed_visualizacion, \
+                                                       entity_classes_visualizacion, entities_embed_procesado,
+                                                      entity_classes_procesado)
+
+                    # Cargo las celdas del notebook a analizar y sus numeros de celda
                     cadena_analizar = Cargar_datos_code.cargar_jupyter_code_connum(input_path)
-                    resultados = codebert_train.clasificacion(ruta_modelos, cadena_analizar)
+                    # Llamo al metodo correspondiente para clasificar las celdas
+                    resultados = binario_clasificador.clasificacion(ruta_modelos, cadena_analizar)
+                    # resultados=codebert_train.clasificacion(ruta_modelos,cadena_analizar)
 
                     # Escribo el JSON con toda la informacion relevante del notebook
                     Escritura_JSON.escribir_JSON(output_dir, bash, autor, titulo, None, descripcion_depurada, None,

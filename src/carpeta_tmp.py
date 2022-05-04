@@ -1,6 +1,5 @@
 import subprocess
 import tempfile
-from datetime import date
 from datetime import datetime
 
 class carpeta_tmp:

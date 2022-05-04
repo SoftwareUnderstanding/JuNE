@@ -1,4 +1,4 @@
-import pandas as pd
+
 
 class Depurar_datos_outputs:
 
