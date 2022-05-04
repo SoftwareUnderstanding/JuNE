@@ -31,3 +31,6 @@ Options:
   --help                 Show this message and exit.
 
 ```
+##Instalacion
+Es necesaria la version de python3.8
+(Pendiente de completar)
