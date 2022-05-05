@@ -32,5 +32,19 @@ Options:
 
 ```
 ##Instalacion
-Es necesaria la version de python3.8
-(Pendiente de completar)
+Es necesaria la version de python3.8 \
+En primer lugar debe realizar la clonacion del repositorio mediante el comando: \
+```
+git clone https://github.com/SoftwareUnderstanding/JuNE
+```
+Posteriormente debera acceder al proyecto: \
+```
+cd JuNE
+```
+Por ultimo instalar el setup.py: \
+```
+pip install -e .
+```
+Finalmente antes de su ejecucion debera instalar pytorch , los métodos de instalacion se
+encuentran en el siguiente enlace: \
+https://pytorch.org/

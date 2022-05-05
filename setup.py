@@ -35,7 +35,7 @@ setup(
     include_package_data=True,
     install_requires=install_requires,
     dependency_links=dependency_links,
-    python_requires=">=3.6",
+    python_requires="=3.6",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python",
