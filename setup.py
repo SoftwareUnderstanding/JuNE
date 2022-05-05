@@ -20,13 +20,11 @@ with open('requirements.txt', 'r') as f:
 
 packages = find_packages()
 
-version = {}
-with open("JuNE/__init__.py") as fp:
-    exec(fp.read(), version)
+
 
 setup(
     name='JuNE',
-    version=version["__version__"],
+    version='0.0.1',
     packages=packages,
     url='https://github.com/DanielRodriguezRguez/TFG-Extraccion-metadatos-Jupyter-Notebook',
     license='BSD-3-Clause',
