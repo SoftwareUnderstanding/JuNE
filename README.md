@@ -31,7 +31,7 @@ Options:
   --help                 Show this message and exit.
 
 ```
-##Instalacion
+## Instalacion
 Es necesaria la version de python3.8 \
 En primer lugar debe realizar la clonacion del repositorio mediante el comando: \
 ```
