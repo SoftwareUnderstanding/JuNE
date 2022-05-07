@@ -7,7 +7,6 @@ from cargar_datos_markdown import Cargar_datos_markdown as Cargar_datos_markdown
 from cargar_datos_metadata import Cargar_datos_metadata as Cargar_datos_metadata
 from depurar_datos_source import Depurar_datos as Depurar_datos
 from escritura_JSON import Escritura_JSON as Escritura_JSON
-from extraer_paths import Extraer_paths as Extraer_paths
 from inspect4py import Inspect4py as Inspect4py
 from jupyteraPython import JupyteraPython as JupyteraPython
 from lectura_JSON import Lectura_JSON as Lectura_JSON
@@ -19,6 +18,7 @@ from carpeta_tmp import carpeta_tmp as carpeta_tmp
 from codebert_train import codebert_train as codebert_train
 from binario_clasificador import binario_clasificador
 from clasificadores import Clasificadores as Clasificadores
+from extraer_inputpaths import Extraer_paths as Extraer_paths
 
 def crear_output_dir(output_dir, input_path):
     control=os.path.abspath(os.getcwd())
@@ -96,8 +96,9 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     cadena_metadata = Cargar_datos_metadata.cargar_jupyter_metadata(input_path)
                     cadena_source = Obtener_metadatos_code.obtener_source(cadena_codigo)
                     cadena_source = Depurar_datos.eliminar_espacios_saltoslinea(cadena_source)
-                    #Extraigo los paths que haya en el archivo
-                    cadena_paths = Extraer_paths.extraer_path(cadena_source)
+                    #Extraigo los input paths que haya en el archivo
+                    cadena_paths=Extraer_paths.transformaciones_cadenas(cadena_source)
+
                     # Obtengo el titulo y el autor del Notebook
                     if len(cadena_metadata) != 0:
                         autor = Obtener_autor_titulo.obtener_autor(cadena_metadata)
@@ -164,7 +165,8 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     cadena_source = Depurar_datos.eliminar_espacios_saltoslinea(cadena_source)
                     # Obtengo las lineas de codigo bash depurando antes las lineas para eliminar saltos de linea
                     bash = Obtener_imports_bashcode.obtener_bash_code(cadena_source)
-                    cadena_paths = Extraer_paths.extraer_path(cadena_source)
+                    cadena_paths = Extraer_paths.transformaciones_cadenas(cadena_source)
+
                     # Llamo al clasificador para clasificar las celdas.
                     ruta_modelos = os.path.abspath(os.path.dirname(__file__))
                     visualizaciones=0

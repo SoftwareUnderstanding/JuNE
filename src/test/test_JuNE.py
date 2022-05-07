@@ -7,7 +7,7 @@ from src.cargar_datos_code import Cargar_datos_code
 from src.cargar_datos_markdown import Cargar_datos_markdown
 from src.cargar_datos_metadata import Cargar_datos_metadata
 from src.carpeta_tmp import *
-from src.extraer_paths import Extraer_paths
+from src.extraer_inputpaths import Extraer_paths
 from src.jupyteraPython import JupyteraPython
 from src.futurize import Futurize
 from src.inspect4py import Inspect4py
@@ -66,7 +66,7 @@ class test(unittest.TestCase):
         cadena_codigo = Cargar_datos_code.cargar_jupyter_code(ruta + "/test_data/test_carga_datos.ipynb")
         cadena_source = Obtener_metadatos_code.obtener_source(cadena_codigo)
         cadena_source = Depurar_datos.eliminar_espacios_saltoslinea(cadena_source)
-        paths=Extraer_paths.extraer_path(cadena_source)
+        paths=Extraer_paths.transformaciones_cadenas(cadena_source)
         assert output==paths
 
     def test_JupyteraPython(self):
