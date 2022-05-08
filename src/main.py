@@ -97,7 +97,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     cadena_source = Obtener_metadatos_code.obtener_source(cadena_codigo)
                     cadena_source = Depurar_datos.eliminar_espacios_saltoslinea(cadena_source)
                     #Extraigo los input paths que haya en el archivo
-                    cadena_paths=Extraer_paths.transformaciones_cadenas(cadena_source)
+                    cadena_paths=Extraer_paths.extraccion_paths(cadena_source)
 
                     # Obtengo el titulo y el autor del Notebook
                     if len(cadena_metadata) != 0:
@@ -165,8 +165,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     cadena_source = Depurar_datos.eliminar_espacios_saltoslinea(cadena_source)
                     # Obtengo las lineas de codigo bash depurando antes las lineas para eliminar saltos de linea
                     bash = Obtener_imports_bashcode.obtener_bash_code(cadena_source)
-                    cadena_paths = Extraer_paths.transformaciones_cadenas(cadena_source)
-
+                    cadena_paths = Extraer_paths.extraccion_paths(cadena_source)
                     # Llamo al clasificador para clasificar las celdas.
                     ruta_modelos = os.path.abspath(os.path.dirname(__file__))
                     visualizaciones=0
