@@ -16,9 +16,20 @@ class Lectura_JSON:
                 requerimientos2=[]
                 with open(ruta, "r") as j:
                     datos=json.load(j)
-                    requerimientos= datos['requirements']
-                    for i in requerimientos:
-                        requerimientos2.append({'name': i, 'version': requerimientos[i]})
+                    if 'requirements' in datos:
+                        requerimientos = datos['requirements']
+                        for i in requerimientos:
+                                requerimientos2.append({'name': i, 'version': requerimientos[i]})
+                    else:
+                        posicion=ruta.find("directory")
+                        posicion_nombre=ruta.find('/tmp/')
+                        cadena_sin_nombre=ruta[:posicion]
+                        nombre=cadena_sin_nombre[len('/tmp/'):-1]
+                        clave=cadena_sin_nombre+nombre
+                        for i in datos[clave]:
+                           requerimientos= i['dependencies']
+                        for i in requerimientos:
+                            requerimientos2.append({'name':i['import'], 'type':i['type']})
                 return requerimientos2
             except:
                 print("No se han podido obtener las dependencias mediante inspect4py")

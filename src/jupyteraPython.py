@@ -22,16 +22,18 @@ class JupyteraPython:
             cell_type = cell['cell_type']
 
             if cell_type == 'markdown':
-                    result.append('%s"""\n%s\n"""' %
+                result.append('%s"""\n%s\n"""' %
                               (header_comment, ''.join(cell['source'])))
 
             if cell_type == 'code':
+                cadena=[]
                 for i in cell['source']:
                     if i.startswith('!') or i.startswith('%'):
-                        cell['source'].remove(i)
-                else:
-                    result.append("%s%s" % (header_comment, ''.join(cell['source'])))
+                        continue
+                    else:
+                        cadena.append(i)
 
+                result.append("%s%s" % (header_comment, ''.join(cadena)))
         return '\n\n'.join(result)
 
     def py2nb(py_str):

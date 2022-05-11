@@ -1,13 +1,13 @@
 ,Approach,Accuracy,Matthews
-0,Decision Tree_configuracion,0.5333333333333333,0.040291148201269014
-1,Decision Tree_visualizacion,0.6333333333333333,0.27865801780244004
-2,Decision Tree_procesado,0.8,0.6054055145966812
-3,GaussianNB_config,0.5,-0.0890870806374748
-4,GaussianNB_visualizacion,0.5,-0.05976143046671968
-5,GaussianNB_procesado,0.5,-0.05976143046671968
-6,MLPClassifier_configuracion,0.4666666666666667,0.0
-7,MLPClassifier_visualizacion,0.5333333333333333,0.0
-8,MLPCLassifier_procesado,0.5333333333333333,-0.005301404289424247
-9,RandomForestClassifier_config,0.6,0.19094065395649332
-10,RandomForestClassifier_visualizacion,0.8,0.6071428571428571
-11,RandomForest_procesado,0.8333333333333334,0.6831615920317885
+0,Decision Tree_configuracion,0.5666666666666667,0.13608276348795434
+1,Decision Tree_visualizacion,0.6666666666666666,0.28867513459481287
+2,Decision Tree_procesado,0.7,0.4242640687119285
+3,GaussianNB_config,0.5333333333333333,0.08944271909999159
+4,GaussianNB_visualizacion,0.6,0.08006407690254358
+5,GaussianNB_procesado,0.4666666666666667,0.08006407690254358
+6,MLPClassifier_configuracion,0.5,0.0
+7,MLPClassifier_visualizacion,0.43333333333333335,0.045360921162651446
+8,MLPCLassifier_procesado,0.4,-0.2683281572999747
+9,RandomForestClassifier_config,0.7,0.40089186286863654
+10,RandomForestClassifier_visualizacion,0.8,0.600099198148979
+11,RandomForest_procesado,0.9,0.8017837257372731
