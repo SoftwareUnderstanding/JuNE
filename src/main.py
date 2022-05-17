@@ -105,7 +105,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                         titulo = Obtener_autor_titulo.obtener_titulo(cadena_metadata)
                     else:
                         autor = []
-                        titulo = []
+                        titulo = nombre_archivo
 
                     # Obtengo las lineas de codigo bash depurando antes las lineas para eliminar saltos de linea
                     bash = Obtener_imports_bashcode.obtener_bash_code(cadena_source)
@@ -157,7 +157,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                         titulo = Obtener_autor_titulo.obtener_titulo(cadena_metadata)
                     else:
                         autor = []
-                        titulo = []
+                        titulo = nombre_archivo
 
                     #Cargo las celdas de código y las depuro eliminado saltos y espacios innecesarios.
                     cadena_codigo = Cargar_datos_code.cargar_jupyter_code(input_path)

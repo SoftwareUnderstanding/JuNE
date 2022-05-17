@@ -31,7 +31,37 @@ class JupyteraPython:
                     if i.startswith('!') or i.startswith('%'):
                         continue
                     else:
-                        cadena.append(i)
+                        resultado=i.find("print")
+                        cadena_sinespacios=i.strip()
+                        if(resultado!=-1 and not cadena_sinespacios.startswith("#") and not cadena_sinespacios.startswith("def")
+                            and not cadena_sinespacios.startswith("from")):
+                            if(i[resultado+len("print")]!="(" and i[resultado+len("print")]!="_"):
+                                    cadenanueva=i[:resultado+len("print")]+"("
+                                    comentario=i[resultado + len("print"):].find("#")
+                                    funcionformat=i[resultado + len("print"):].find(".format")
+                                    if(comentario!=-1):
+                                        cuerpo = i[resultado + len("print"):comentario]
+                                        cuerpo_coment=i[comentario:]
+                                        cadena_final=cadenanueva+cuerpo+cuerpo_coment+")"+"\n"
+                                        cadena.append(cadena_final)
+                                    else:
+                                        if(funcionformat!=-1):
+                                            if(comentario==-1):
+                                                cuerpo = i[resultado + len("print"):]
+                                            else:
+                                                cuerpo = i[resultado + len("print"):comentario]
+                                            cadena_final = cadenanueva + cuerpo + ")"+"\n"
+                                            cadena.append(cadena_final)
+                                        else:
+                                            cuerpo=i[resultado+len("print"):]+")"
+                                            cadena_final=cadenanueva+cuerpo+"\n"
+                                            cadena.append(cadena_final)
+                            else:
+                                if(i[resultado+len("print")]=="("):
+                                    cadena.append(i)
+                        else:
+
+                            cadena.append(i)
 
                 result.append("%s%s" % (header_comment, ''.join(cadena)))
         return '\n\n'.join(result)
