@@ -82,7 +82,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     # Si inspect4py no ha sido capaz de extraer la descripcion utilizo la primera línea de texto
                     if len(descripcion)==0:
                             cadena_markdown = Cargar_datos_markdown.cargar_jupyter_markdown(input_path)
-                            if cadena_markdown:
+                            if cadena_markdown and cadena_markdown[0]['source']!=[]:
                                 descripcion=cadena_markdown[0]['source']
                                 descripcion = Depurar_datos.depurar_descripcion(descripcion)
                             else:
@@ -142,7 +142,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                 else:
                     #Crago las celdas de texto del notebook
                     cadena_markdown = Cargar_datos_markdown.cargar_jupyter_markdown(input_path)
-                    if cadena_markdown:
+                    if cadena_markdown and cadena_markdown[0]['source']!=[]:
                         #Obtengo la descripcion
                         descripcion = cadena_markdown[0]['source']
                         #Elimino saltos de linea
@@ -152,7 +152,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                         descripcion_depurada=[]
                     #Cargo los metadatos para comprobar si hay autores del notebook
                     cadena_metadata = Cargar_datos_metadata.cargar_jupyter_metadata(input_path)
-                    if len(cadena_metadata) != 0:
+                    if len(cadena_metadata) != 0 :
                         autor = Obtener_autor_titulo.obtener_autor(cadena_metadata)
                         titulo = Obtener_autor_titulo.obtener_titulo(cadena_metadata)
                     else:
@@ -179,14 +179,14 @@ def main(input_path, tmp_dir, output_dir,inspect):
 
                     # CLASIFICADOR BINARIO
                     #Esta es la llamada que se realiza para la obtencion del entrenamiento de los clasificadores
-                    entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
-                    entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado = binario_clasificador.embeddings(
-                        ruta_modelos)
+                    #entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
+                    #entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado = binario_clasificador.embeddings(
+                    #    ruta_modelos)
 
-                    binario_clasificador.entrenamiento(ruta_modelos, entities_embed_configuracion,
-                                                       entity_classes_configuracion, entities_embed_visualizacion, \
-                                                       entity_classes_visualizacion, entities_embed_procesado,
-                                                      entity_classes_procesado)
+                    #binario_clasificador.entrenamiento(ruta_modelos, entities_embed_configuracion,
+                                                      # entity_classes_configuracion, entities_embed_visualizacion, \
+                                                       #entity_classes_visualizacion, entities_embed_procesado,
+                                                      #entity_classes_procesado)
 
                     # Cargo las celdas del notebook a analizar y sus numeros de celda
                     cadena_analizar = Cargar_datos_code.cargar_jupyter_code_connum(input_path)
