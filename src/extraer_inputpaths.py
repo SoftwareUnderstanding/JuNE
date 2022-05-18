@@ -22,6 +22,7 @@ class Extraer_paths:
 
         #Recorremos la cadena que contiene las celdas de código
         for i in cadena_code:
+
             #Recorremos cada linea de cada celda de código
             for x in i:
                 #Comprobamos que no sea una linea comentada o un import
@@ -94,6 +95,7 @@ class Extraer_paths:
 
         #Recorremos la cadena_busqueda para poder encontrar el path asociado a la variables que detectamos anteriormente
         for x in cadena_busqueda:
+
             #Extraemos los datos
             limite=0
             posicion=x[2]
@@ -110,7 +112,6 @@ class Extraer_paths:
             else :
                 #Extraemos el nombre de la variable desde el principio del paréntesis hasta la coma
                 nombre_var = linea[posicion+1:posicion_coma]
-
 
             #Una vez obtenida la variable debemos saber si es una llamada del tipo variable=path dentro de la propia llamada
             variable_con_ruta=nombre_var.find('=')
@@ -132,8 +133,12 @@ class Extraer_paths:
                     # Eliminamos las dobles comillas y comillas que pueda haber
                     texto = texto.replace("'", '')
                     texto = texto.replace('"', '')
-                    # Añadimos el path a la cadena final
-                    paths_variables.append(texto)
+                    for i in terminaciones:
+                        terminacion = texto.find(i)
+                        # Comprobamos si es un path de un archivo o una ruta http o https.
+                        if (terminacion != -1 or texto.startswith(' https:') or texto.startswith(' http:')):
+                            # Añadimos el path a la cadena final
+                            paths_variables.append(texto)
             else:
                 #Si no cumple con el patron es decir unicamente contiene el nombre de la variable
                 #Buscamos la variable dentro de la celda para localizar el path
@@ -170,7 +175,7 @@ class Extraer_paths:
                 input_paths.append(i_sin_espacios)
         for l in cadena_paths_final:
             # Comprobamos que no haya paths repetidos
-            if not i in input_paths:
+            if not l in input_paths:
                 input_paths.append(l)
         return input_paths
 

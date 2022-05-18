@@ -19,7 +19,6 @@ class Inspect4py:
         print("Finding the requirements with the inspect4py package for %s" % input_path)
         try:
             file_name = os.path.basename(input_path)
-
             #Ejecuto el comando para utilizar inspect4py
             cmd = 'inspect4py -r -si -i' + ' ' + input_path +' '+ '-o'+ ' '+ output_path
             # cmd = 'echo n | pigar -P ' + input_path + ' --without-referenced-comments -p ' + file_name

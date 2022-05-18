@@ -34,7 +34,7 @@ class JupyteraPython:
                         resultado=i.find("print")
                         cadena_sinespacios=i.strip()
                         if(resultado!=-1 and not cadena_sinespacios.startswith("#") and not cadena_sinespacios.startswith("def")
-                            and not cadena_sinespacios.startswith("from")):
+                            and not cadena_sinespacios.startswith("from") and cadena_sinespacios!='print'):
                             if(i[resultado+len("print")]!="(" and i[resultado+len("print")]!="_"):
                                     cadenanueva=i[:resultado+len("print")]+"("
                                     comentario=i[resultado + len("print"):].find("#")
@@ -60,8 +60,8 @@ class JupyteraPython:
                                 if(i[resultado+len("print")]=="("):
                                     cadena.append(i)
                         else:
-
-                            cadena.append(i)
+                            if(cadena_sinespacios!="print"):
+                                cadena.append(i)
 
                 result.append("%s%s" % (header_comment, ''.join(cadena)))
         return '\n\n'.join(result)
