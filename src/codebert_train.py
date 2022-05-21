@@ -9,6 +9,8 @@ from sklearn.metrics import accuracy_score
 from sklearn import tree
 import sklearn
 import os
+import torch
+from sklearn.metrics import f1_score
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
@@ -33,17 +35,14 @@ class codebert_train:
             celda.append(line[1])
 
         #Definimos el tokenizer y el modelo que vamos a usar
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
         model = AutoModel.from_pretrained("microsoft/codebert-base")
-        with open(ruta+"/Modelos_codebert/tokenizer.pkl", 'wb') as file:
-            pickle.dump(tokenizer, file)
-        with open(ruta+"/Modelos_codebert/model.pkl", 'wb') as file:
-            pickle.dump(model, file)
-
+        model.to(device)
         #Realizamos los embeddings de la cadena celda
         entities = celda
         entities_tokenize = tokenizer(entities, return_tensors="pt", padding='max_length', truncation=True,
-                                      max_length=12, add_special_tokens=True)
+                                      max_length=30, add_special_tokens=True)
         entities_embed = model(entities_tokenize.input_ids)[0].prod(dim=1).detach().numpy()
         entity_classes = labels
 
@@ -62,7 +61,7 @@ class codebert_train:
         DecisionTreeAccuracy = codebert_train.getAccuracy(y_test, prediction)
         DecisionTreeF1 = codebert_train.getF1(y_test, prediction)
         DecisionTreeMatthews = codebert_train.getMatthews(y_test, prediction)
-        results.append(["Multiclase","Decision Tree", DecisionTreeAccuracy, DecisionTreeMatthews] + DecisionTreeF1)
+        results.append(["Multiclase","Decision Tree", DecisionTreeAccuracy, DecisionTreeMatthews,DecisionTreeF1])
         #Guardamos el modelo
         codebert_train.save_model(ruta+"/Modelos_codebert/DecisionTreeClassifier.pkl", clf)
 
@@ -74,7 +73,7 @@ class codebert_train:
         GaussianNBAccuracy = codebert_train.getAccuracy(y_test, GaussianNBPredictions)
         GaussianNBF1 = codebert_train.getF1(y_test, GaussianNBPredictions)
         GaussianNBMatthews = codebert_train.getMatthews(y_test, GaussianNBPredictions)
-        results.append(["Multiclase","GaussianNB", GaussianNBAccuracy, GaussianNBMatthews] + GaussianNBF1)
+        results.append(["Multiclase","GaussianNB", GaussianNBAccuracy, GaussianNBMatthews,GaussianNBF1])
         #Guardamos el modelo
         codebert_train.save_model(ruta + "/Modelos_codebert/GaussianNB.pkl", clf)
 
@@ -86,7 +85,7 @@ class codebert_train:
         MLPClassifierAccuracy = codebert_train.getAccuracy(y_test, MLPClassifierPredictions)
         MLPClassifierF1 = codebert_train.getF1(y_test, MLPClassifierPredictions)
         MLPClassifierMatthews = codebert_train.getMatthews(y_test, MLPClassifierPredictions)
-        results.append(["Multiclase","MLPClassifier", MLPClassifierAccuracy, MLPClassifierMatthews] + MLPClassifierF1)
+        results.append(["Multiclase","MLPClassifier", MLPClassifierAccuracy, MLPClassifierMatthews,MLPClassifierF1])
         # Guardamos el modelo
         codebert_train.save_model(ruta + "/Modelos_codebert/MLPClassifier.pkl", clf)
 
@@ -99,11 +98,11 @@ class codebert_train:
         RandomForestClassifierF1 = codebert_train.getF1(y_test, RandomForestClassifierPredictions)
         RandomForestClassifierMatthews = codebert_train.getMatthews(y_test, RandomForestClassifierPredictions)
         results.append(["Multiclase","RandomForestClassifier", RandomForestClassifierAccuracy,
-                        RandomForestClassifierMatthews] + RandomForestClassifierF1)
+                        RandomForestClassifierMatthews,RandomForestClassifierF1])
         # Guardamos el modelo
         codebert_train.save_model(ruta + "/Modelos_codebert/RandomForest.pkl", clf)
 
-        resultados=pd.DataFrame(results, columns=["Clasificador","Approach", "Accuracy", "Matthews"] + sorted(set(y_test)))
+        resultados=pd.DataFrame(results, columns=["Clasificador","Approach", "Accuracy", "Matthews","F1"])
         resultados.to_csv(ruta + "/Modelos_codebert/Resultados_multiclasificador.csv")
         return 0
 
@@ -112,7 +111,6 @@ class codebert_train:
         Método encargado de calcular la precision de un clasificador en base a sus predicciones.
         Args:
             predictions: Predicciones realizadas por el clasificador para el conjunto de test
-
         Returns:
         Devuelve las metricas asociadas al clasificador.
         """
@@ -123,7 +121,6 @@ class codebert_train:
         Método encargado de calcular el valor F1 para un clasificador
         Args:
             predictions: Predicciones realizadas por el clasificador para el conjunto de test
-
         Returns:
         El valor calculado para F1
         """
@@ -132,12 +129,12 @@ class codebert_train:
             f1.append(sklearn.metrics.f1_score(y_test, predictions, labels=[l], average='micro'))
         return f1
 
+
     def getMatthews(y_test, predictions):
         """
         Método encargado de calcular el valor Matthews para un clasificador
         Args:
             predictions: Predicciones realizadas por el clasificador para el conjunto de test
-
         Returns:
          El valor calculado para Matthews
         """
@@ -185,7 +182,7 @@ class codebert_train:
             #print(cadena_unida)
             #prueba
             entities_tokenize=tokenizer(cadena_unida, return_tensors="pt", padding='max_length', truncation=True,
-                                      max_length=12, add_special_tokens=True)
+                                      max_length=30, add_special_tokens=True)
             entities_embed= model(entities_tokenize.input_ids)[0].prod(dim=1).detach().numpy()
             prediccion = classifier.predict(entities_embed)
             for label in prediccion:
