@@ -438,7 +438,6 @@ class binario_clasificador:
                         #Compruebo las predicciones de la celda
                         #Compruebo si es configuracion o noconfiguracion
                         for label in prediccion_config:
-                                print(label)
                                 if (label == 'Configuracion'):
                                         #Aumento la variable de conteo de celdas de configuracion
                                         configuracion += 1
@@ -447,7 +446,6 @@ class binario_clasificador:
 
                         #Compruebo si es visualizacion o novisualizacion
                         for label in prediccion_visualizaciones:
-                                print(label)
                                 if (label == 'Visualizacion'):
                                         # Aumento la variable de conteo de celdas de visualizacion
                                         visualizaciones += 1

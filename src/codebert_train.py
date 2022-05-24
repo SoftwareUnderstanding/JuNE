@@ -179,8 +179,6 @@ class codebert_train:
         for i,t in zip(cadena_source['celdas'],cadena_source['num_celdas']):
             cadena_unida = []
             cadena_unida.append("".join(i))
-            #print(cadena_unida)
-            #prueba
             entities_tokenize=tokenizer(cadena_unida, return_tensors="pt", padding='max_length', truncation=True,
                                       max_length=30, add_special_tokens=True)
             entities_embed= model(entities_tokenize.input_ids)[0].prod(dim=1).detach().numpy()

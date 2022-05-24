@@ -55,7 +55,7 @@ class Clasificadores:
         DecisionTreeMatthews = Clasificadores.getMatthews(test_labels, predicciones)
         accuracy = accuracy_score(test_labels, predicciones)
         # Almaceno la precision del clasificador DecisionTreeCLassifier
-        resultados.append(["Bag of words","DecisionTreeCLassifier", DecisionTreeAccuracy,DecisionTreeMatthews]+DecisionTreeF1)
+        resultados.append(["DecisionTreeCLassifier", DecisionTreeAccuracy,DecisionTreeMatthews ,DecisionTreeF1])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
         pkl_filename = ruta+"/Modelos/TreeDecision.pkl"
@@ -72,14 +72,14 @@ class Clasificadores:
         GaussianNBMatthews = Clasificadores.getMatthews(test_labels, predicciones)
         accuracy = accuracy_score(test_labels, predicciones)
         # Almaceno la precision del clasificador LogisticRegression
-        resultados.append(["Bag of words","GaussianNB", GaussianNBAccuracy,GaussianNBMatthews]+GaussianNBF1)
+        resultados.append(["GaussianNB", GaussianNBAccuracy,GaussianNBMatthews,GaussianNBF1])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
         pkl_filename = ruta+"/Modelos/GaussianNB.pkl"
         with open(pkl_filename, 'wb') as file:
             pickle.dump(classifier, file)
-
         """
+
         # MLPClassifier
         classifier = MLPClassifier(random_state=0, max_iter=300)
         classifier.fit(train_X, train_labels)
@@ -89,7 +89,7 @@ class Clasificadores:
         MLPClassifierMatthews = Clasificadores.getMatthews(test_labels, predicciones)
         accuracy = accuracy_score(test_labels, predicciones)
         # Almaceno la precision del clasificador MLPClassifer
-        resultados.append(["Bag of words", "MLPCLassifier", MLPClassifierAccuracy, MLPClassifierMatthews] + MLPClassifierF1)
+        resultados.append(["MLPCLassifier", MLPClassifierAccuracy, MLPClassifierMatthews, MLPClassifierF1])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
         pkl_filename = ruta+"/Modelos/MLPCLassifier.pkl"
@@ -105,7 +105,7 @@ class Clasificadores:
         RandomForestClassifierMatthews = Clasificadores.getMatthews(test_labels, predicciones)
         accuracy = accuracy_score(test_labels, predicciones)
         # Almaceno la precision del clasificador RandomForestClassifer
-        resultados.append(["Bag of words", "RandomForest", RandomForestClassifierAccuracy, RandomForestClassifierMatthews] + RandomForestClassifierF1)
+        resultados.append(["RandomForest", RandomForestClassifierAccuracy, RandomForestClassifierMatthews,RandomForestClassifierF1])
         print(f"Accuracy: {accuracy:.4%}")
         # Guardo el modelo utilizado utilizando pickle
         pkl_filename = ruta+"/Modelos/RandomForestClassifier.pkl"
@@ -116,7 +116,8 @@ class Clasificadores:
         with open(ruta+"/Modelos/vectorizer.pkl", 'wb') as file:
             pickle.dump(real_vectorizer, file)
 
-        resultados_final = pd.DataFrame(resultados, columns=["Clasificador","Approach", "Accuracy", "Matthews"] + sorted(set(test_labels)))
+        print("hola")
+        resultados_final = pd.DataFrame(resultados, columns=["Clasificador","Accuracy", "Matthews","F1"])
         resultados_final.to_csv(ruta + "/Modelos_codebert/Resultadosbagofwords.csv")
 
         return 0

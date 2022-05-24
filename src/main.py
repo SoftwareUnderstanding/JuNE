@@ -115,7 +115,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     imports=0;
 
                     #Bag of words
-                    # Clasificadores.tokenizar(ruta_modelos)
+                    #Clasificadores.tokenizar(ruta_modelos)
                     #visualizaciones,imports=clasificadores.clasificacion(ruta_modelos,cadena_source)
 
 
@@ -171,7 +171,7 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     visualizaciones=0
                     imports=0
                     # Bag of words
-                    # Clasificadores.tokenizar(ruta_modelos)
+                    #Clasificadores.tokenizar(ruta_modelos)
                     # visualizaciones,imports=clasificadores.clasificacion(ruta_modelos,cadena_source)
 
                     # CLASIFICADOR MULTIVARIANTE
