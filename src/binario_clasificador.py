@@ -122,7 +122,6 @@ class binario_clasificador:
 
                 # Variable donde vamos a almacenar los resultados de los clasificadores (accuracy ,F1 , Mathew)
                 results = []
-                print("hola")
                 # Aplicamos los modelos ( entrenamiento y prediccion)
                 # DecisionTreeClassifier
                 # Cargamos el clasificador
@@ -427,11 +426,11 @@ class binario_clasificador:
                 Diccionario que contiene las clasificaciones asi como su numero de celda.
                 """
                 # Cargo los clasificadores preentrenados anteriormente
-                with open(ruta + "/Modelos_codebert/clasificadores_binarios/RandomForestClassifier_config.pkl", 'rb') as file_config:
+                with open(ruta + "/Modelos_codebert/clasificadores_binarios/DecisionTreeClassifier_config.pkl", 'rb') as file_config:
                         classifier_config = pickle.load(file_config)
                 with open(ruta + "/Modelos_codebert/clasificadores_binarios/RandomForestClassifier_visualizacion.pkl", 'rb') as file_visualizaciones:
                         classifier_visualizaciones = pickle.load(file_visualizaciones)
-                with open(ruta + "/Modelos_codebert/clasificadores_binarios/RandomForestClassifier_procesado.pkl", 'rb') as file_procesado:
+                with open(ruta + "/Modelos_codebert/clasificadores_binarios/DecisionTreeClassifier_procesado.pkl", 'rb') as file_procesado:
                         classifier_procesado = pickle.load(file_procesado)
                 with open(ruta + "/Modelos_codebert/tokenizer.pkl", 'rb') as file:
                         tokenizer = pickle.load(file)

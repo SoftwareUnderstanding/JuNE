@@ -19,6 +19,7 @@ from codebert_train import codebert_train as codebert_train
 from binario_clasificador import binario_clasificador
 from clasificadores import Clasificadores as Clasificadores
 from extraer_inputpaths import Extraer_paths as Extraer_paths
+from bagofwords_binario import bagofwords_binario
 
 def crear_output_dir(output_dir, input_path):
     control=os.path.abspath(os.getcwd())
@@ -118,17 +119,26 @@ def main(input_path, tmp_dir, output_dir,inspect):
                     #Clasificadores.tokenizar(ruta_modelos)
                     #visualizaciones,imports=clasificadores.clasificacion(ruta_modelos,cadena_source)
 
+                    #Bag of words binario
+                    #entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
+                    #entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado= bagofwords_binario.tokenizar(ruta_modelos)
 
+                    #bagofwords_binario.entrenamiento(ruta_modelos,entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
+                    #entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado)
+
+                    #cadena_analizar = Cargar_datos_code.cargar_jupyter_code_connum(input_path)
+                    #bagofwords_binario.clasificacion(ruta_modelos,cadena_analizar)
                     #CLASIFICADOR MULTIVARIANTE
                     #codebert_train.entrenamiento(ruta_modelos)
 
+
                     #CLASIFICADORES BINARIO
                     #Esta es la llamada que se realiza para la obtencion del entrenamiento de los clasificadores
-                    entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
-                    entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado= binario_clasificador.embeddings(ruta_modelos)
+                    #entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
+                    #entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado= binario_clasificador.embeddings(ruta_modelos)
 
-                    binario_clasificador.entrenamiento(ruta_modelos,entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
-                    entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado)
+                    #binario_clasificador.entrenamiento(ruta_modelos,entities_embed_configuracion, entity_classes_configuracion, entities_embed_visualizacion, \
+                    #entity_classes_visualizacion, entities_embed_procesado, entity_classes_procesado)
 
                     #Cargo las celdas del notebook a analizar y sus numeros de celda
                     cadena_analizar=Cargar_datos_code.cargar_jupyter_code_connum(input_path)
